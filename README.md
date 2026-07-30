@@ -5,7 +5,11 @@ Desenvolvimento Web** — 2026.2.
 
 ## Integrantes
 
-_A definir apos o sorteio na Aula 01._
+- Kelvin Barros Dias
+- Paula de Freitas Mendes Barbosa
+- Guilherme Neves de Assis
+- Francisca Bianca da Silva
+- Raul de Queiroz Moura
 
 ## Fluxo de trabalho
 
