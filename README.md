@@ -11,6 +11,15 @@ Desenvolvimento Web** — 2026.2.
 - Francisca Bianca da Silva
 - Raul de Queiroz Moura
 
+## Gestão do Projeto & Documentação da Equipe
+
+* 📑 **[Documentação do Sistema](./DOCUMENTACAO_SISTEMA.md)**: Visão geral da arquitetura, stack tecnológica, fluxos de autenticação e guia de execução.
+* 🎯 **[Hub de Gestão do Projeto](./Gestão%20do%20Projeto/README.md)**: Visão consolidada da organização da Equipe Bravo.
+* 🏷️ **[Padrões de Nomenclatura e Gitflow](./Gestão%20do%20Projeto/01_padroes_nomenclatura.md)**: Convenções de commits, branches, PRs e código.
+* 👥 **[Divisão de Papéis e Frentes](./Gestão%20do%20Projeto/02_divisao_atividades_equipe.md)**: Frentes técnicas e responsabilidades dos 5 integrantes.
+* 📅 **[Backlog de Tasks e Sprints](./Gestão%20do%20Projeto/03_backlog_tasks_sprints.md)**: Planejamento detalhado das Sprints 1 a 15, Histórias de Usuário e Definition of Done.
+
+
 ## Começando
 
 Este repositório **já vem com o projeto-base pronto**: backend em FastAPI, frontend em
