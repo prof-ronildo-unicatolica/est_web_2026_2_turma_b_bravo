@@ -1,8 +1,9 @@
 # 📘 Playbook de Execução Diária — Equipe Bravo (2026.2)
-**Projeto:** StayFlow — Sistema de Gestão Hoteleira  
-**Repositório:** [DevKelvinbd/est_web_2026_2_turma_b_bravo](https://github.com/DevKelvinbd/est_web_2026_2_turma_b_bravo)  
-**Branch de Integração:** `develop`  
-**Branch Fonte dos Arquivos Prontos:** `backup/stayflow-completo`  
+
+**Projeto Oficial (Onde subimos as tasks/PRs):** [prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo](https://github.com/prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo)  
+**Repositório Fonte (Onde os arquivos prontos ficam guardados):** [DevKelvinbd/est_web_2026_2_turma_b_bravo](https://github.com/DevKelvinbd/est_web_2026_2_turma_b_bravo)  
+**Branch de Integração Oficial:** `develop`  
+**Branch Fonte dos Arquivos Prontos:** `fonte/backup/stayflow-completo`  
 
 ---
 
@@ -18,19 +19,42 @@
 
 ---
 
-## ⚡ Como Funciona a Execução Rápida (Zero Esforço)
+## ⚡ Preparação Única na Máquina de Cada Aluno
 
-Todos os arquivos do projeto já estão 100% implementados na branch de backup `backup/stayflow-completo`.  
+Antes da primeira task, o aluno configura o repositório oficial e adiciona o repositório de download com o comando:
+
+```bash
+# 1. Clonar o repositório oficial da turma:
+git clone https://github.com/prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo.git
+cd est_web_2026_2_turma_b_bravo
+
+# 2. Adicionar o repositório fonte de download dos arquivos:
+git remote add fonte https://github.com/DevKelvinbd/est_web_2026_2_turma_b_bravo.git
+git fetch fonte
+```
+
+---
+
+## 🚀 Como Funciona a Execução Rápida (Zero Esforço)
+
+Todos os arquivos do projeto já estão 100% implementados na branch de backup `fonte/backup/stayflow-completo`.  
 Para cumprir cada tarefa:
-1. Atualize sua branch `develop`.
-2. Crie a branch da task indicada.
-3. Copie o arquivo pronto diretamente do backup usando o comando:
+1. Atualize sua branch `develop` a partir da oficial:
    ```bash
-   git checkout backup/stayflow-completo -- <caminho-do-arquivo>
+   git checkout develop && git pull origin develop
    ```
-4. Faça o `git commit` com a mensagem indicada.
-5. Dê `git push` e abra o Pull Request com destino na `develop`.
-6. O revisor indicado acessa o GitHub, aprova o PR e faz o Merge.
+2. Crie a branch da task indicada:
+   ```bash
+   git checkout -b <nome-da-branch>
+   ```
+3. Copie o arquivo pronto diretamente do repositório fonte usando o comando:
+   ```bash
+   git checkout fonte/backup/stayflow-completo -- <caminho-do-arquivo>
+   ```
+4. Faça o `git commit` com a mensagem indicada no roteiro.
+5. Dê `git push -u origin <nome-da-branch>` para enviar ao repositório oficial da turma.
+6. Abra o Pull Request no GitHub da turma apontando para a `develop`.
+7. O revisor indicado acessa o GitHub oficial, aprova o PR e faz o Merge.
 
 ---
 
@@ -75,12 +99,13 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b chore/docker-env-config
-  git checkout backup/stayflow-completo -- .gitignore apps/services/core-service/requirements.txt apps/services/core-service/pyproject.toml
+  git checkout fonte/backup/stayflow-completo -- .gitignore apps/services/core-service/requirements.txt apps/services/core-service/pyproject.toml
   git add .gitignore apps/services/core-service/requirements.txt apps/services/core-service/pyproject.toml
   git commit -m "chore(infra): atualiza dependencias e variaveis de ambiente da stack"
   git push -u origin chore/docker-env-config
   ```
 * **Abertura do PR:**
+  * **Repositório:** [prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo](https://github.com/prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo)
   * **Base:** `develop` | **Head:** `chore/docker-env-config`
   * **Título:** `[Sprint 1] Chore: Configuração de dependências e ambiente Docker`
   * **Reviewer:** Kelvin Barros Dias
@@ -99,7 +124,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/db-initial-connection
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/core/config.py apps/services/core-service/alembic/env.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/core/config.py apps/services/core-service/alembic/env.py
   git add apps/services/core-service/app/core/config.py apps/services/core-service/alembic/env.py
   git commit -m "feat(db): configura conexao unificada sqlalchemy e alembic"
   git push -u origin feature/db-initial-connection
@@ -126,7 +151,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/frontend-shell-layout
-  git checkout backup/stayflow-completo -- apps/frontend/package.json apps/frontend/package-lock.json apps/frontend/src/components/layout/Navbar.jsx apps/frontend/src/components/layout/Footer.jsx apps/frontend/src/index.css
+  git checkout fonte/backup/stayflow-completo -- apps/frontend/package.json apps/frontend/package-lock.json apps/frontend/src/components/layout/Navbar.jsx apps/frontend/src/components/layout/Footer.jsx apps/frontend/src/index.css
   git add apps/frontend/package.json apps/frontend/package-lock.json apps/frontend/src/components/layout/Navbar.jsx apps/frontend/src/components/layout/Footer.jsx apps/frontend/src/index.css
   git commit -m "feat(frontend): cria componentes de layout Navbar, Footer e tokens css"
   git push -u origin feature/frontend-shell-layout
@@ -155,7 +180,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/auth-security-jwt-backend
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/models/usuario.py apps/services/core-service/app/core/security.py apps/services/core-service/app/schemas/auth.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/models/usuario.py apps/services/core-service/app/core/security.py apps/services/core-service/app/schemas/auth.py
   git add apps/services/core-service/app/models/usuario.py apps/services/core-service/app/core/security.py apps/services/core-service/app/schemas/auth.py
   git commit -m "feat(auth): implementa modelo de usuario, hash bcrypt e geracao jwt"
   git push -u origin feature/auth-security-jwt-backend
@@ -182,7 +207,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/auth-endpoints-service
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/services/auth_service.py apps/services/core-service/app/api/deps.py apps/services/core-service/app/api/v1/auth.py apps/services/core-service/app/db/__init__.py apps/services/core-service/app/db/seed.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/services/auth_service.py apps/services/core-service/app/api/deps.py apps/services/core-service/app/api/v1/auth.py apps/services/core-service/app/db/__init__.py apps/services/core-service/app/db/seed.py
   git add apps/services/core-service/app/services/auth_service.py apps/services/core-service/app/api/deps.py apps/services/core-service/app/api/v1/auth.py apps/services/core-service/app/db/__init__.py apps/services/core-service/app/db/seed.py
   git commit -m "feat(auth): implementa servico de autenticacao, dependencias rbac e endpoints auth"
   git push -u origin feature/auth-endpoints-service
@@ -209,7 +234,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/frontend-auth-integration
-  git checkout backup/stayflow-completo -- apps/frontend/src/services/api.js apps/frontend/src/contexts/AuthContext.jsx apps/frontend/src/components/layout/ProtectedRoute.jsx apps/frontend/src/pages/LoginPage.jsx apps/frontend/src/pages/RegisterPage.jsx
+  git checkout fonte/backup/stayflow-completo -- apps/frontend/src/services/api.js apps/frontend/src/contexts/AuthContext.jsx apps/frontend/src/components/layout/ProtectedRoute.jsx apps/frontend/src/pages/LoginPage.jsx apps/frontend/src/pages/RegisterPage.jsx
   git add apps/frontend/src/services/api.js apps/frontend/src/contexts/AuthContext.jsx apps/frontend/src/components/layout/ProtectedRoute.jsx apps/frontend/src/pages/LoginPage.jsx apps/frontend/src/pages/RegisterPage.jsx
   git commit -m "feat(frontend): implementa auth context, interceptor jwt e telas de login e cadastro"
   git push -u origin feature/frontend-auth-integration
@@ -233,7 +258,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b test/auth-integration-suite
-  git checkout backup/stayflow-completo -- apps/services/core-service/tests/conftest.py apps/services/core-service/tests/test_auth_jwt.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/tests/conftest.py apps/services/core-service/tests/test_auth_jwt.py
   git add apps/services/core-service/tests/conftest.py apps/services/core-service/tests/test_auth_jwt.py
   git commit -m "test(auth): implementa suite de testes automatizados para fluxos jwt e rbac"
   git push -u origin test/auth-integration-suite
@@ -265,7 +290,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/hotel-models-schemas
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/models/cidade.py apps/services/core-service/app/models/hotel.py apps/services/core-service/app/models/comodidade.py apps/services/core-service/app/models/quarto.py apps/services/core-service/app/models/__init__.py apps/services/core-service/app/schemas/hotelaria.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/models/cidade.py apps/services/core-service/app/models/hotel.py apps/services/core-service/app/models/comodidade.py apps/services/core-service/app/models/quarto.py apps/services/core-service/app/models/__init__.py apps/services/core-service/app/schemas/hotelaria.py
   git add apps/services/core-service/app/models/cidade.py apps/services/core-service/app/models/hotel.py apps/services/core-service/app/models/comodidade.py apps/services/core-service/app/models/quarto.py apps/services/core-service/app/models/__init__.py apps/services/core-service/app/schemas/hotelaria.py
   git commit -m "feat(models): implementa modelos orm e schemas pydantic para cidade, hotel, quarto e comodidades"
   git push -u origin feature/hotel-models-schemas
@@ -289,7 +314,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/hotel-catalog-api
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/api/v1/hoteis.py apps/services/core-service/alembic/versions/f519176e1f37_add_stayflow_domain_models.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/api/v1/hoteis.py apps/services/core-service/alembic/versions/f519176e1f37_add_stayflow_domain_models.py
   git add apps/services/core-service/app/api/v1/hoteis.py apps/services/core-service/alembic/versions/f519176e1f37_add_stayflow_domain_models.py
   git commit -m "feat(api): implementa endpoints de busca e catalogo de hoteis e migracao alembic"
   git push -u origin feature/hotel-catalog-api
@@ -313,7 +338,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/frontend-hotel-catalog
-  git checkout backup/stayflow-completo -- apps/frontend/src/pages/HomePage.jsx apps/frontend/src/pages/HotelDetailPage.jsx
+  git checkout fonte/backup/stayflow-completo -- apps/frontend/src/pages/HomePage.jsx apps/frontend/src/pages/HotelDetailPage.jsx
   git add apps/frontend/src/pages/HomePage.jsx apps/frontend/src/pages/HotelDetailPage.jsx
   git commit -m "feat(frontend): implementa telas de home com busca de hoteis e detalhes com quartos"
   git push -u origin feature/frontend-hotel-catalog
@@ -343,7 +368,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/booking-pricing-engine
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/models/reserva.py apps/services/core-service/app/models/tarifa_temporada.py apps/services/core-service/app/models/servico_adicional.py apps/services/core-service/app/services/pricing_service.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/models/reserva.py apps/services/core-service/app/models/tarifa_temporada.py apps/services/core-service/app/models/servico_adicional.py apps/services/core-service/app/services/pricing_service.py
   git add apps/services/core-service/app/models/reserva.py apps/services/core-service/app/models/tarifa_temporada.py apps/services/core-service/app/models/servico_adicional.py apps/services/core-service/app/services/pricing_service.py
   git commit -m "feat(pricing): implementa modelos de reservas e temporadas com motor de precificacao dinamica"
   git push -u origin feature/booking-pricing-engine
@@ -366,7 +391,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/booking-api-endpoints
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/api/v1/reservas.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/api/v1/reservas.py
   git add apps/services/core-service/app/api/v1/reservas.py
   git commit -m "feat(api): implementa endpoints de criacao, simulacao e cancelamento de reservas"
   git push -u origin feature/booking-api-endpoints
@@ -389,7 +414,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/frontend-checkout-booking
-  git checkout backup/stayflow-completo -- apps/frontend/src/pages/CheckoutPage.jsx
+  git checkout fonte/backup/stayflow-completo -- apps/frontend/src/pages/CheckoutPage.jsx
   git add apps/frontend/src/pages/CheckoutPage.jsx
   git commit -m "feat(frontend): implementa tela de checkout com calculo em tempo real e servicos adicionais"
   git push -u origin feature/frontend-checkout-booking
@@ -417,7 +442,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/frontend-booking-status-voucher
-  git checkout backup/stayflow-completo -- apps/frontend/src/pages/BookingStatusPage.jsx apps/frontend/src/pages/MyBookingsPage.jsx
+  git checkout fonte/backup/stayflow-completo -- apps/frontend/src/pages/BookingStatusPage.jsx apps/frontend/src/pages/MyBookingsPage.jsx
   git add apps/frontend/src/pages/BookingStatusPage.jsx apps/frontend/src/pages/MyBookingsPage.jsx
   git commit -m "feat(frontend): implementa tela de status/voucher e painel de minhas reservas com cancelamento"
   git push -u origin feature/frontend-booking-status-voucher
@@ -441,7 +466,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/reviews-ratings-api
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/models/avaliacao.py apps/services/core-service/app/api/v1/avaliacoes.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/models/avaliacao.py apps/services/core-service/app/api/v1/avaliacoes.py
   git add apps/services/core-service/app/models/avaliacao.py apps/services/core-service/app/api/v1/avaliacoes.py
   git commit -m "feat(api): implementa modelo e endpoints de avaliacoes e notas de hoteis"
   git push -u origin feature/reviews-ratings-api
@@ -469,7 +494,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/admin-dashboard-backend
-  git checkout backup/stayflow-completo -- apps/services/core-service/app/api/v1/admin.py apps/services/core-service/app/main.py
+  git checkout fonte/backup/stayflow-completo -- apps/services/core-service/app/api/v1/admin.py apps/services/core-service/app/main.py
   git add apps/services/core-service/app/api/v1/admin.py apps/services/core-service/app/main.py
   git commit -m "feat(admin): implementa endpoints administrativos de gestao e registro geral de rotas"
   git push -u origin feature/admin-dashboard-backend
@@ -495,7 +520,7 @@ graph TD
   git checkout develop
   git pull origin develop
   git checkout -b feature/admin-dashboard-frontend
-  git checkout backup/stayflow-completo -- apps/frontend/src/pages/admin/AdminDashboard.jsx apps/frontend/src/App.jsx apps/frontend/src/main.jsx apps/frontend/index.html
+  git checkout fonte/backup/stayflow-completo -- apps/frontend/src/pages/admin/AdminDashboard.jsx apps/frontend/src/App.jsx apps/frontend/src/main.jsx apps/frontend/index.html
   git add apps/frontend/src/pages/admin/AdminDashboard.jsx apps/frontend/src/App.jsx apps/frontend/src/main.jsx apps/frontend/index.html
   git commit -m "feat(frontend): implementa painel administrativo integrado e rotas protegidas no app"
   git push -u origin feature/admin-dashboard-frontend
