@@ -5,19 +5,23 @@ Desenvolvimento Web** — 2026.2.
 
 ## Integrantes
 
-- Kelvin Barros Dias
-- Paula de Freitas Mendes Barbosa
-- Guilherme Neves de Assis
-- Francisca Bianca da Silva
-- Raul de Queiroz Moura
+1. **Kelvin Barros Dias**
+2. **Paula de Freitas Mendes Barbosa**
+3. **Guilherme Neves de Assis**
+4. **Francisca Bianca da Silva**
+5. **Raul de Queiroz Moura**
+6. **Atyla Braga**
+7. **Herbert Monteiro**
 
 ## Gestão do Projeto & Documentação da Equipe
 
 * 📑 **[Documentação do Sistema](./DOCUMENTACAO_SISTEMA.md)**: Visão geral da arquitetura, stack tecnológica, fluxos de autenticação e guia de execução.
 * 🎯 **[Hub de Gestão do Projeto](./Gestão%20do%20Projeto/README.md)**: Visão consolidada da organização da Equipe Bravo.
 * 🏷️ **[Padrões de Nomenclatura e Gitflow](./Gestão%20do%20Projeto/01_padroes_nomenclatura.md)**: Convenções de commits, branches, PRs e código.
-* 👥 **[Divisão de Papéis e Frentes](./Gestão%20do%20Projeto/02_divisao_atividades_equipe.md)**: Frentes técnicas e responsabilidades dos 5 integrantes.
-* 📅 **[Backlog de Tasks e Sprints](./Gestão%20do%20Projeto/03_backlog_tasks_sprints.md)**: Planejamento detalhado das Sprints 1 a 15, Histórias de Usuário e Definition of Done.
+* 👥 **[Divisão de Papéis e Frentes](./Gestão%20do%20Projeto/02_divisao_atividades_equipe.md)**: Frentes técnicas e responsabilidades dos 7 integrantes.
+* 📅 **[Backlog de Tasks e Sprints](./Gestão%20do%20Projeto/03_backlog_tasks_sprints.md)**: Planejamento detalhado das Sprints, Histórias de Usuário e Definition of Done.
+* 📘 **[Playbook de Execução Diária](./Gestão%20do%20Projeto/05_playbook_execucao_diaria_equipe.md)**: Cronograma e ciclo de Code Review fechado para a equipe de 7 membros.
+* 🛠️ **[Guia Prático de Execução das Tasks](./Gestão%20do%20Projeto/06_guia_execucao_pratica_tasks.md)**: Passo a passo de terminal para extração, commits, PRs e aprovação das 17 tasks.
 
 
 ## Começando

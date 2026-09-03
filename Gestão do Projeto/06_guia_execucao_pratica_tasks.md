@@ -8,7 +8,7 @@
 
 ## 🎯 Objetivo deste Guia
 
-Este documento é o manual prático e visual para todos os integrantes da equipe (**Kelvin, Paula, Guilherme, Bianca e Raul**). Ele explica exatamente **o que fazer**, **como rodar cada comando**, **como abrir o Pull Request (PR)** e **como o colega deve aprovar e mesclar** no GitHub oficial da turma.
+Este documento é o manual prático e visual para todos os **7 integrantes** da equipe (**Kelvin, Paula, Guilherme, Bianca, Raul, Atyla e Herbert**). Ele explica exatamente **o que fazer**, **como rodar cada comando**, **como abrir o Pull Request (PR)** e **como o colega deve aprovar e mesclar** no GitHub oficial da turma.
 
 > [!TIP]
 > **Você não precisará programar nada do zero.** Todo o código-fonte já está pronto e validado na branch `fonte/backup/stayflow-completo`. Sua única função é extrair os arquivos, commitar no padrão, abrir o PR no repositório da disciplina e aprovar as entregas dos colegas.
@@ -91,7 +91,7 @@ flowchart TD
 
 #### 📌 Dia 1 | Tarefa 1.1 — Atualização de Dependências e Docker
 * **Quem executa:** **Raul de Queiroz Moura**
-* **Quem aprova o PR:** **Kelvin Barros Dias**
+* **Quem aprova o PR:** **Atyla Braga**
 * **O que faz:** Atualiza os manifests de dependências (`requirements.txt`, `pyproject.toml`) e regras do `.gitignore`.
 * **Comandos para copiar e colar:**
   ```bash
@@ -103,7 +103,7 @@ flowchart TD
   git commit -m "chore(infra): atualiza dependencias e variaveis de ambiente da stack"
   git push -u origin chore/docker-env-config
   ```
-* **No GitHub Oficial:** Abrir PR de `chore/docker-env-config` para `develop` marcando **Kelvin** como Reviewer.
+* **No GitHub Oficial:** Abrir PR de `chore/docker-env-config` para `develop` marcando **Atyla Braga** como Reviewer.
 
 ---
 
@@ -148,7 +148,7 @@ flowchart TD
 #### 📌 Dia 4 | Tarefa 2.1 — Modelo de Usuário, Hash Bcrypt e Segurança JWT
 * **Quem executa:** **Kelvin Barros Dias**
 * **Quem aprova o PR:** **Paula de Freitas Mendes Barbosa**
-* **O que faz:** Cria a entidade `Usuario`, funções de hash seguro com bcrypt e gerador de tokens JWT.
+* **O que faz:** Modela a entidade de usuários com `passlib/bcrypt` e cria gerador de token JWT.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -166,7 +166,7 @@ flowchart TD
 #### 📌 Dia 5 | Tarefa 2.2 — Serviço de Auth, Dependências RBAC e Endpoints
 * **Quem executa:** **Francisca Bianca da Silva**
 * **Quem aprova o PR:** **Raul de Queiroz Moura**
-* **O que faz:** Implementa o serviço de autenticação, injeção de dependências para verificar usuário/admin e endpoints de `/register`, `/login` e `/me`.
+* **O que faz:** Implementa regras de negócio de login/registro, guardas de autorização (`get_current_admin`) e seed de admin.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -182,9 +182,9 @@ flowchart TD
 ---
 
 #### 📌 Dia 6 | Tarefa 2.3 — Telas de Login/Registro e Contexto de Autenticação
-* **Quem executa:** **Paula de Freitas Mendes Barbosa**
-* **Quem aprova o PR:** **Guilherme Neves de Assis**
-* **O que faz:** Cria as páginas de Login e Cadastro, `AuthContext` para gerenciar estado global e interceptors Axios para injetar `Bearer Token`.
+* **Quem executa:** **Atyla Braga**
+* **Quem aprova o PR:** **Herbert**
+* **O que faz:** Constrói formulários reativos de Login/Cadastro, `AuthContext` e interceptor de token JWT no Axios.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -195,14 +195,14 @@ flowchart TD
   git commit -m "feat(frontend): implementa auth context, interceptor jwt e telas de login e cadastro"
   git push -u origin feature/frontend-auth-integration
   ```
-* **No GitHub Oficial:** Abrir PR de `feature/frontend-auth-integration` para `develop` marcando **Guilherme** como Reviewer.
+* **No GitHub Oficial:** Abrir PR de `feature/frontend-auth-integration` para `develop` marcando **Herbert** como Reviewer.
 
 ---
 
 #### 📌 Dia 7 | Tarefa 2.4 — Suíte de Testes Automatizados JWT & RBAC
 * **Quem executa:** **Raul de Queiroz Moura**
-* **Quem aprova o PR:** **Kelvin Barros Dias**
-* **O que faz:** Adiciona fixtures de banco de testes em `conftest.py` e testes de integração com Pytest cobrindo fluxos de login, cadastro e permissões 401/403.
+* **Quem aprova o PR:** **Atyla Braga**
+* **O que faz:** Cria fixtures no `conftest.py` e testes de integração com Pytest para cobertura 100% de Auth.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -213,16 +213,16 @@ flowchart TD
   git commit -m "test(auth): implementa suite de testes automatizados para fluxos jwt e rbac"
   git push -u origin test/auth-integration-suite
   ```
-* **No GitHub Oficial:** Abrir PR de `test/auth-integration-suite` para `develop` marcando **Kelvin** como Reviewer.
+* **No GitHub Oficial:** Abrir PR de `test/auth-integration-suite` para `develop` marcando **Atyla Braga** como Reviewer.
 
 ---
 
 ### 🏨 SPRINT 3 — Domínio Hoteleiro & Catálogo de Hotéis
 
 #### 📌 Dia 8 | Tarefa 3.1 — Modelos ORM e Schemas Pydantic do Domínio Hoteleiro
-* **Quem executa:** **Francisca Bianca da Silva**
-* **Quem aprova o PR:** **Raul de Queiroz Moura**
-* **O que faz:** Mapeia as entidades `Cidade`, `Hotel`, `Quarto`, `Comodidade` no SQLAlchemy e cria os schemas Pydantic.
+* **Quem executa:** **Herbert**
+* **Quem aprova o PR:** **Kelvin Barros Dias**
+* **O que faz:** Cria modelos relacionais (`Cidade`, `Hotel`, `Quarto`, `Comodidade`) e schemas de entrada/saída.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -233,14 +233,14 @@ flowchart TD
   git commit -m "feat(models): implementa modelos orm e schemas pydantic para cidade, hotel, quarto e comodidades"
   git push -u origin feature/hotel-models-schemas
   ```
-* **No GitHub Oficial:** Abrir PR de `feature/hotel-models-schemas` para `develop` marcando **Raul** como Reviewer.
+* **No GitHub Oficial:** Abrir PR de `feature/hotel-models-schemas` para `develop` marcando **Kelvin** como Reviewer.
 
 ---
 
 #### 📌 Dia 9 | Tarefa 3.2 — Endpoints de Catálogo e Migração Alembic
 * **Quem executa:** **Guilherme Neves de Assis**
 * **Quem aprova o PR:** **Francisca Bianca da Silva**
-* **O que faz:** Cria a rota de busca de hotéis `/api/v1/hoteis` (filtros por preço, cidade, estrelas) e o script de migração Alembic.
+* **O que faz:** Cria rotas de consulta pública e filtros de hotéis (`/api/v1/hoteis`) com migração Alembic.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -258,7 +258,7 @@ flowchart TD
 #### 📌 Dia 10 | Tarefa 3.3 — Telas de Busca de Hotéis e Detalhes da Acomodação
 * **Quem executa:** **Paula de Freitas Mendes Barbosa**
 * **Quem aprova o PR:** **Guilherme Neves de Assis**
-* **O que faz:** Cria a página inicial com busca inteligente (`HomePage.jsx`) e a página de visualização do hotel com quartos disponíveis (`HotelDetailPage.jsx`).
+* **O que faz:** Desenvolve telas de Home com filtros dinâmicos de cidades e página detalhada de quartos e comodidades.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -278,7 +278,7 @@ flowchart TD
 #### 📌 Dia 11 | Tarefa 4.1 — Motor de Precificação Dinâmica e Modelos de Reserva
 * **Quem executa:** **Kelvin Barros Dias**
 * **Quem aprova o PR:** **Paula de Freitas Mendes Barbosa**
-* **O que faz:** Cria as entidades `Reserva`, `TarifaTemporada`, `ServicoAdicional` e o serviço `pricing_service.py` para cálculo de diárias e sazonais.
+* **O que faz:** Implementa o cálculo inteligente de diárias considerando sazonalidade, tarifas de temporada e serviços adicionais.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -296,7 +296,7 @@ flowchart TD
 #### 📌 Dia 12 | Tarefa 4.2 — Endpoints REST para Criação e Gestão de Reservas
 * **Quem executa:** **Francisca Bianca da Silva**
 * **Quem aprova o PR:** **Raul de Queiroz Moura**
-* **O que faz:** Implementa o endpoint `/api/v1/reservas` com cálculo de preço em tempo real, verificação de datas e cancelamento.
+* **O que faz:** Cria endpoints de simulação, reserva efetiva e cancelamento com validações de conflito de datas.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -312,9 +312,9 @@ flowchart TD
 ---
 
 #### 📌 Dia 13 | Tarefa 4.3 — Tela de Checkout com Simulação em Tempo Real
-* **Quem executa:** **Guilherme Neves de Assis**
-* **Quem aprova o PR:** **Francisca Bianca da Silva**
-* **O que faz:** Constrói a tela interativa de Checkout (`CheckoutPage.jsx`) com seleção de datas, cálculo dinâmico via API e seleção de serviços extras.
+* **Quem executa:** **Atyla Braga**
+* **Quem aprova o PR:** **Herbert**
+* **O que faz:** Desenvolve formulário de reserva com seleção de datas, cálculo instantâneo de diárias e seleção de adicionais.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -325,7 +325,7 @@ flowchart TD
   git commit -m "feat(frontend): implementa tela de checkout com calculo em tempo real e servicos adicionais"
   git push -u origin feature/frontend-checkout-booking
   ```
-* **No GitHub Oficial:** Abrir PR de `feature/frontend-checkout-booking` para `develop` marcando **Bianca** como Reviewer.
+* **No GitHub Oficial:** Abrir PR de `feature/frontend-checkout-booking` para `develop` marcando **Herbert** como Reviewer.
 
 ---
 
@@ -334,7 +334,7 @@ flowchart TD
 #### 📌 Dia 14 | Tarefa 5.1 — Telas de Status de Reserva, Voucher e Histórico
 * **Quem executa:** **Paula de Freitas Mendes Barbosa**
 * **Quem aprova o PR:** **Guilherme Neves de Assis**
-* **O que faz:** Cria a tela de confirmação/voucher (`BookingStatusPage.jsx`) e a central de gestão do hóspede (`MyBookingsPage.jsx`).
+* **O que faz:** Cria tela de confirmação de reserva com voucher digital formatado e painel de histórico de reservas do cliente.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -350,9 +350,9 @@ flowchart TD
 ---
 
 #### 📌 Dia 15 | Tarefa 5.2 — Módulo de Avaliações e Notas dos Hotéis
-* **Quem executa:** **Francisca Bianca da Silva**
-* **Quem aprova o PR:** **Raul de Queiroz Moura**
-* **O que faz:** Cria a tabela e endpoints de avaliações (`/api/v1/avaliacoes`), permitindo aos hóspedes registrar notas de 1 a 5 estrelas e comentários.
+* **Quem executa:** **Herbert**
+* **Quem aprova o PR:** **Kelvin Barros Dias**
+* **O que faz:** Implementa modelo de avaliações, pontuação com estrelas e endpoints de envio de feedback dos hóspedes.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -363,16 +363,16 @@ flowchart TD
   git commit -m "feat(api): implementa modelo e endpoints de avaliacoes e notas de hoteis"
   git push -u origin feature/reviews-ratings-api
   ```
-* **No GitHub Oficial:** Abrir PR de `feature/reviews-ratings-api` para `develop` marcando **Raul** como Reviewer.
+* **No GitHub Oficial:** Abrir PR de `feature/reviews-ratings-api` para `develop` marcando **Kelvin** como Reviewer.
 
 ---
 
 ### 📊 SPRINT 6 — Painel Administrativo & Orquestração Final
 
 #### 📌 Dia 16 | Tarefa 6.1 — Endpoints Administrativos e Registro Geral da API
-* **Quem executa:** **Raul de Queiroz Moura**
-* **Quem aprova o PR:** **Kelvin Barros Dias**
-* **O que faz:** Implementa os endpoints do painel de administração (`/api/v1/admin`) e conecta todos os routers no arquivo principal `app/main.py`.
+* **Quem executa:** **Francisca Bianca da Silva**
+* **Quem aprova o PR:** **Raul de Queiroz Moura**
+* **O que faz:** Cria rotas de gestão de métricas do hotel para o administrador e registra todas as rotas no `main.py`.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -383,14 +383,14 @@ flowchart TD
   git commit -m "feat(admin): implementa endpoints administrativos de gestao e registro geral de rotas"
   git push -u origin feature/admin-dashboard-backend
   ```
-* **No GitHub Oficial:** Abrir PR de `feature/admin-dashboard-backend` para `develop` marcando **Kelvin** como Reviewer.
+* **No GitHub Oficial:** Abrir PR de `feature/admin-dashboard-backend` para `develop` marcando **Raul** como Reviewer.
 
 ---
 
 #### 📌 Dia 17 | Tarefa 6.2 — Painel Administrativo e Roteamento Geral da Aplicação
 * **Quem executa:** **Kelvin Barros Dias**
 * **Quem aprova o PR:** **Paula de Freitas Mendes Barbosa**
-* **O que faz:** Cria a interface completa de gestão administrativa (`AdminDashboard.jsx`) e fecha o roteamento final do React em `App.jsx` e `main.jsx`.
+* **O que faz:** Finaliza o dashboard administrativo no frontend com gráficos de ocupação, tabela de reservas e roteamento global.
 * **Comandos para copiar e colar:**
   ```bash
   git checkout develop
@@ -405,42 +405,14 @@ flowchart TD
 
 ---
 
-## 🔍 4. Como o Revisor Deve Aprovar o PR no GitHub Oficial
+## 🏆 4. Resumo de Contribuição por Integrante
 
-Quando o seu colega abrir o Pull Request e marcar você como Reviewer no repositório da disciplina:
-
-1. Acesse: [https://github.com/prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo/pulls](https://github.com/prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo/pulls)
-2. Clique no PR aberto pelo seu colega.
-3. Clique na aba **"Files changed"** (canto superior direito) para visualizar os arquivos.
-4. Clique no botão verde **"Review changes"**:
-   * Selecione **"Approve"**.
-   * Adicione um comentário positivo (ex: *"Código validado e em conformidade com o padrão do projeto. Aprovado!"*).
-   * Clique em **"Submit review"**.
-5. Retorne à aba **"Conversation"**, clique no botão **"Merge pull request"** (ou "Squash and merge") e depois em **"Confirm merge"**.
-6. Pronto! A tarefa está oficialmente integrada na branch `develop` do repositório da disciplina.
-
----
-
-## ❓ 5. Dúvidas Frequentes & Resolução de Problemas
-
-* **Erro:** *"fatal: invalid reference: fonte/backup/stayflow-completo"*  
-  **Solução:** Atualize suas referências do repositório fonte rodando:
-  ```bash
-  git fetch fonte
-  ```
-
-* **Erro:** *"Your branch is behind 'origin/develop'"*  
-  **Solução:** Sempre atualize sua branch `develop` oficial antes de criar a nova branch:
-  ```bash
-  git checkout develop
-  git pull origin develop
-  ```
-
-* **Dúvida:** *"Como testar o sistema completo localmente se eu quiser ver rodando?"*  
-  **Solução:**
-  ```bash
-  docker compose up -d --build
-  ```
-  Acesse no navegador:
-  * **Frontend:** `http://localhost:5173`
-  * **Backend API Docs:** `http://localhost:8000/docs`
+| Integrante | PRs Como Autor | PRs Como Revisor |
+|---|:---:|:---:|
+| **Kelvin Barros Dias** | Dia 4, Dia 11, Dia 17 (**3 PRs**) | Dia 8, Dia 15 (**2 PRs**) |
+| **Paula de Freitas Mendes Barbosa** | Dia 3, Dia 10, Dia 14 (**3 PRs**) | Dia 4, Dia 11, Dia 17 (**3 PRs**) |
+| **Guilherme Neves de Assis** | Dia 2, Dia 9 (**2 PRs**) | Dia 3, Dia 10, Dia 14 (**3 PRs**) |
+| **Francisca Bianca da Silva** | Dia 5, Dia 12, Dia 16 (**3 PRs**) | Dia 2, Dia 9 (**2 PRs**) |
+| **Raul de Queiroz Moura** | Dia 1, Dia 7 (**2 PRs**) | Dia 5, Dia 12, Dia 16 (**3 PRs**) |
+| **Atyla Braga** | Dia 6, Dia 13 (**2 PRs**) | Dia 1, Dia 7 (**2 PRs**) |
+| **Herbert** | Dia 8, Dia 15 (**2 PRs**) | Dia 6, Dia 13 (**2 PRs**) |

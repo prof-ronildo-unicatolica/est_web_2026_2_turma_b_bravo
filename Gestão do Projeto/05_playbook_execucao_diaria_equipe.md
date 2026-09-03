@@ -7,15 +7,19 @@
 
 ---
 
-## 👥 Integrantes e Ciclo de Code Review
+## 👥 Integrantes e Ciclo de Code Review (Anel Fechado de 7 Integrantes)
+
+Para garantir que todos os integrantes contribuam tanto na submissão de código quanto no processo de revisão (critério avaliativo da disciplina), adotamos o **anel fechado de revisão por pares**:
 
 | # | Integrante | Papel Principal | Revisa PR de quem? |
 |---|---|---|---|
-| 1 | **Kelvin Barros Dias** | Líder Backend / Auth / Core | ➔ Revisa PRs do **Raul** |
-| 2 | **Paula de Freitas Mendes Barbosa** | Líder Frontend / UI / Telas Clientes | ➔ Revisa PRs do **Kelvin** |
-| 3 | **Guilherme Neves de Assis** | Backend / Precificação / Reservas | ➔ Revisa PRs da **Paula** |
-| 4 | **Francisca Bianca da Silva** | Backend / Catálogo / Schemas / Avaliações | ➔ Revisa PRs do **Guilherme** |
-| 5 | **Raul de Queiroz Moura** | DevOps / Docker / Admin / Testes | ➔ Revisa PRs da **Bianca** |
+| 1 | **Kelvin Barros Dias** | Líder Backend / Auth / Core | ➔ Revisa PRs do **Herbert** |
+| 2 | **Paula de Freitas Mendes Barbosa** | Líder Frontend / UI / Catálogo | ➔ Revisa PRs do **Kelvin Barros** |
+| 3 | **Guilherme Neves de Assis** | Backend / Banco de Dados / Catálogo | ➔ Revisa PRs da **Paula de Freitas** |
+| 4 | **Francisca Bianca da Silva** | Backend / Schemas / Reservas & Admin | ➔ Revisa PRs do **Guilherme Neves** |
+| 5 | **Raul de Queiroz Moura** | DevOps / Docker / QA / Testes | ➔ Revisa PRs da **Francisca Bianca** |
+| 6 | **Atyla Braga** | Fullstack / Auth Frontend / Checkout | ➔ Revisa PRs do **Raul de Queiroz** |
+| 7 | **Herbert Monteiro** | Backend & Frontend / Modelos & Avaliações | ➔ Revisa PRs do **Atyla Braga** |
 
 ---
 
@@ -58,7 +62,7 @@ Para cumprir cada tarefa:
 
 ---
 
-## 📅 Roteiro Diário de Subida das Tarefas
+## 📅 Roteiro Diário de Subida das Tarefas (7 Integrantes)
 
 ```mermaid
 graph TD
@@ -66,17 +70,17 @@ graph TD
     D2 --> D3["Dia 3: Paula<br>Layout Shell & CSS"]
     D3 --> D4["Dia 4: Kelvin<br>Model Usuário & JWT"]
     D4 --> D5["Dia 5: Bianca<br>Auth Service & Endpoints"]
-    D5 --> D6["Dia 6: Paula<br>Telas Login & Register"]
+    D5 --> D6["Dia 6: Atyla<br>Telas Login & Register"]
     D6 --> D7["Dia 7: Raul<br>Suíte de Testes Auth"]
-    D7 --> D8["Dia 8: Bianca<br>Models Domínio Hoteleiro"]
+    D7 --> D8["Dia 8: Herbert<br>Models Domínio Hoteleiro"]
     D8 --> D9["Dia 9: Guilherme<br>API Catálogo & Migração"]
     D9 --> D10["Dia 10: Paula<br>Telas Home & Hotel Detail"]
     D10 --> D11["Dia 11: Kelvin<br>Motor Precificação"]
     D11 --> D12["Dia 12: Bianca<br>API Reservas"]
-    D12 --> D13["Dia 13: Guilherme<br>Tela Checkout"]
+    D12 --> D13["Dia 13: Atyla<br>Tela Checkout"]
     D13 --> D14["Dia 14: Paula<br>Telas Status & Vouchers"]
-    D14 --> D15["Dia 15: Bianca<br>API Avaliações"]
-    D15 --> D16["Dia 16: Raul<br>API Admin & Main"]
+    D14 --> D15["Dia 15: Herbert<br>API Avaliações"]
+    D15 --> D16["Dia 16: Bianca<br>API Admin & Main"]
     D16 --> D17["Dia 17: Kelvin<br>Painel Admin Frontend"]
 ```
 
@@ -88,7 +92,7 @@ graph TD
 
 #### 📌 Dia 1 | Tarefa 1.1 — Atualização de Dependências e Docker
 * **Responsável:** **Raul de Queiroz Moura**
-* **Revisor Obrigatório:** **Kelvin Barros Dias**
+* **Revisor Obrigatório:** **Atyla Braga**
 * **Branch:** `chore/docker-env-config`
 * **Arquivos:**
   * `.gitignore`
@@ -108,7 +112,7 @@ graph TD
   * **Repositório:** [prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo](https://github.com/prof-ronildo-unicatolica/est_web_2026_2_turma_b_bravo)
   * **Base:** `develop` | **Head:** `chore/docker-env-config`
   * **Título:** `[Sprint 1] Chore: Configuração de dependências e ambiente Docker`
-  * **Reviewer:** Kelvin Barros Dias
+  * **Reviewer:** Atyla Braga
 
 ---
 
@@ -220,8 +224,8 @@ graph TD
 ---
 
 #### 📌 Dia 6 | Tarefa 2.3 — Telas de Login/Registro e Contexto de Autenticação
-* **Responsável:** **Paula de Freitas Mendes Barbosa**
-* **Revisor Obrigatório:** **Guilherme Neves de Assis**
+* **Responsável:** **Atyla Braga**
+* **Revisor Obrigatório:** **Herbert**
 * **Branch:** `feature/frontend-auth-integration`
 * **Arquivos:**
   * `apps/frontend/src/services/api.js`
@@ -242,13 +246,13 @@ graph TD
 * **Abertura do PR:**
   * **Base:** `develop` | **Head:** `feature/frontend-auth-integration`
   * **Título:** `[Sprint 2] Feat: Telas de Login/Registro e Contexto de Autenticação com JWT`
-  * **Reviewer:** Guilherme Neves de Assis
+  * **Reviewer:** Herbert
 
 ---
 
 #### 📌 Dia 7 | Tarefa 2.4 — Suíte de Testes Automatizados JWT & RBAC
 * **Responsável:** **Raul de Queiroz Moura**
-* **Revisor Obrigatório:** **Kelvin Barros Dias**
+* **Revisor Obrigatório:** **Atyla Braga**
 * **Branch:** `test/auth-integration-suite`
 * **Arquivos:**
   * `apps/services/core-service/tests/conftest.py`
@@ -266,7 +270,7 @@ graph TD
 * **Abertura do PR:**
   * **Base:** `develop` | **Head:** `test/auth-integration-suite`
   * **Título:** `[Sprint 2] Test: Suíte de testes de integração JWT e permissões RBAC`
-  * **Reviewer:** Kelvin Barros Dias
+  * **Reviewer:** Atyla Braga
 
 ---
 
@@ -275,8 +279,8 @@ graph TD
 ---
 
 #### 📌 Dia 8 | Tarefa 3.1 — Modelos ORM e Schemas Pydantic do Domínio Hoteleiro
-* **Responsável:** **Francisca Bianca da Silva**
-* **Revisor Obrigatório:** **Raul de Queiroz Moura**
+* **Responsável:** **Herbert**
+* **Revisor Obrigatório:** **Kelvin Barros Dias**
 * **Branch:** `feature/hotel-models-schemas`
 * **Arquivos:**
   * `apps/services/core-service/app/models/cidade.py`
@@ -298,7 +302,7 @@ graph TD
 * **Abertura do PR:**
   * **Base:** `develop` | **Head:** `feature/hotel-models-schemas`
   * **Título:** `[Sprint 3] Feat: Modelos SQLAlchemy e Schemas Pydantic do Domínio Hoteleiro`
-  * **Reviewer:** Raul de Queiroz Moura
+  * **Reviewer:** Kelvin Barros Dias
 
 ---
 
@@ -404,8 +408,8 @@ graph TD
 ---
 
 #### 📌 Dia 13 | Tarefa 4.3 — Tela de Checkout com Simulação em Tempo Real
-* **Responsável:** **Guilherme Neves de Assis**
-* **Revisor Obrigatório:** **Francisca Bianca da Silva**
+* **Responsável:** **Atyla Braga**
+* **Revisor Obrigatório:** **Herbert**
 * **Branch:** `feature/frontend-checkout-booking`
 * **Arquivos:**
   * `apps/frontend/src/pages/CheckoutPage.jsx`
@@ -422,7 +426,7 @@ graph TD
 * **Abertura do PR:**
   * **Base:** `develop` | **Head:** `feature/frontend-checkout-booking`
   * **Título:** `[Sprint 4] Feat: Tela de Checkout Interativo com Cálculo em Tempo Real`
-  * **Reviewer:** Francisca Bianca da Silva
+  * **Reviewer:** Herbert
 
 ---
 
@@ -455,8 +459,8 @@ graph TD
 ---
 
 #### 📌 Dia 15 | Tarefa 5.2 — Módulo de Avaliações e Notas dos Hotéis
-* **Responsável:** **Francisca Bianca da Silva**
-* **Revisor Obrigatório:** **Raul de Queiroz Moura**
+* **Responsável:** **Herbert**
+* **Revisor Obrigatório:** **Kelvin Barros Dias**
 * **Branch:** `feature/reviews-ratings-api`
 * **Arquivos:**
   * `apps/services/core-service/app/models/avaliacao.py`
@@ -474,7 +478,7 @@ graph TD
 * **Abertura do PR:**
   * **Base:** `develop` | **Head:** `feature/reviews-ratings-api`
   * **Título:** `[Sprint 5] Feat: Módulo de Avaliações e Notas de Hotéis`
-  * **Reviewer:** Raul de Queiroz Moura
+  * **Reviewer:** Kelvin Barros Dias
 
 ---
 
@@ -483,8 +487,8 @@ graph TD
 ---
 
 #### 📌 Dia 16 | Tarefa 6.1 — Endpoints Administrativos e Registro Geral da API
-* **Responsável:** **Raul de Queiroz Moura**
-* **Revisor Obrigatório:** **Kelvin Barros Dias**
+* **Responsável:** **Francisca Bianca da Silva**
+* **Revisor Obrigatório:** **Raul de Queiroz Moura**
 * **Branch:** `feature/admin-dashboard-backend`
 * **Arquivos:**
   * `apps/services/core-service/app/api/v1/admin.py`
@@ -502,7 +506,7 @@ graph TD
 * **Abertura do PR:**
   * **Base:** `develop` | **Head:** `feature/admin-dashboard-backend`
   * **Título:** `[Sprint 6] Feat: Endpoints Administrativos e Registro Geral de Rotas`
-  * **Reviewer:** Kelvin Barros Dias
+  * **Reviewer:** Raul de Queiroz Moura
 
 ---
 
@@ -532,12 +536,14 @@ graph TD
 
 ---
 
-## 🎯 Resumo de Entregas por Integrante
+## 🎯 Resumo de Entregas por Integrante (7 Membros)
 
 | Integrante | Total de PRs Criados | Total de PRs Revisados/Aprovados | Frentes de Atuação |
 |---|:---:|:---:|---|
-| **Kelvin Barros Dias** | **3** (Dias 4, 11, 17) | **3** (Dias 1, 7, 16) | Auth JWT, Pricing Engine e Admin Frontend |
-| **Paula de Freitas Mendes Barbosa** | **4** (Dias 3, 6, 10, 14) | **3** (Dias 4, 11, 17) | Layout Shell, Auth UI, Catálogo UI e Vouchers |
-| **Guilherme Neves de Assis** | **3** (Dias 2, 9, 13) | **4** (Dias 3, 6, 10, 14) | DB Config, Catálogo API e Checkout UI |
-| **Francisca Bianca da Silva** | **4** (Dias 5, 8, 12, 15) | **3** (Dias 2, 9, 13) | Auth Endpoints, Hotel Models, Reservas API e Avaliações |
-| **Raul de Queiroz Moura** | **3** (Dias 1, 7, 16) | **4** (Dias 5, 8, 12, 15) | Docker/Env, Testes Automatizados e Admin Backend |
+| **Kelvin Barros Dias** | **3** (Dias 4, 11, 17) | **2** (Dias 8, 15) | Auth JWT, Pricing Engine e Admin Frontend |
+| **Paula de Freitas Mendes Barbosa** | **3** (Dias 3, 10, 14) | **3** (Dias 4, 11, 17) | Layout Shell, Catálogo UI e Vouchers |
+| **Guilherme Neves de Assis** | **2** (Dias 2, 9) | **3** (Dias 3, 10, 14) | DB Config, Alembic Migrations e Catálogo API |
+| **Francisca Bianca da Silva** | **3** (Dias 5, 12, 16) | **2** (Dias 2, 9) | Auth Endpoints, Reservas API e Admin Backend |
+| **Raul de Queiroz Moura** | **2** (Dias 1, 7) | **3** (Dias 5, 12, 16) | Docker/Env e Suíte de Testes Automatizados |
+| **Atyla Braga** | **2** (Dias 6, 13) | **2** (Dias 1, 7) | Telas de Auth e Tela de Checkout com Simulação |
+| **Herbert** | **2** (Dias 8, 15) | **2** (Dias 6, 13) | Modelos de Domínio e Módulo de Avaliações/Notas |
