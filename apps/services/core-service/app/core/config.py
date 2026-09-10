@@ -5,7 +5,7 @@ from pydantic_settings import BaseSettings
 class Settings(BaseSettings):
     model_config = ConfigDict(case_sensitive=True, env_file=".env")
 
-    PROJECT_NAME: str = "Sistema de Reservas - Core Service"
+    PROJECT_NAME: str = "StayFlow - Sistema de Gestão Hoteleira"
     API_V1_STR: str = "/api/v1"
 
     # Configurações do PostgreSQL
@@ -26,5 +26,11 @@ class Settings(BaseSettings):
     # Configurações do RabbitMQ
     RABBITMQ_URL: str = "amqp://guest:guest@localhost:5672/"
 
+    # Configurações de Autenticação JWT
+    SECRET_KEY: str = "stayflow-secret-key-change-in-production-2026"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+
 
 settings = Settings()
+

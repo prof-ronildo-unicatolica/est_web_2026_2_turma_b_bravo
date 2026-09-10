@@ -6,7 +6,7 @@ from alembic import context
 
 # Importar modelos e configurações
 from app.core.config import settings
-from app.models.tutorial import Base
+from app.models import Base  # Importa Base + registra todos os models via __init__.py
 
 # Objeto de configuração do Alembic
 config = context.config
