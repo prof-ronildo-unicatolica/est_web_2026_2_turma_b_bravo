@@ -1,69 +1,63 @@
-"""Dependencias de autenticacao/autorizacao - VERSAO BASICA (placeholder).
+"""Dependencias de autenticacao/autorizacao — VERSAO JWT REAL.
 
-⚠️ ATENCAO: implementacao PROPOSITALMENTE simplificada (apenas if/else,
-SEM hash de senha e SEM JWT). Existe apenas para o exemplo base funcionar
-ponta a ponta e dar um contrato de API estavel ao frontend.
-
-A implementacao REAL (senha em bcrypt + JWT assinado + RBAC via banco de
-dados) e a ATIVIDADE DA SPRINT 2:
-    docs/02_engenharia_software/atividade_auth_sprint2.md
+Implementa guards de injecao de dependencia do FastAPI:
+- get_db: Sessao transacional do PostgreSQL
+- get_current_user: Decodifica JWT e carrega o usuario autenticado
+- get_current_admin: Verifica se o usuario possui is_admin=True (RBAC)
 """
 
 from fastapi import Depends, HTTPException, status
-from fastapi.security import HTTPAuthorizationCredentials, HTTPBearer
+from fastapi.security import OAuth2PasswordBearer
+from sqlalchemy.orm import Session
 
-# "Banco" de usuarios em memoria (placeholder). Na atividade da Sprint 2
-# isto sera substituido pela tabela `usuarios` no PostgreSQL, com as
-# senhas armazenadas em hash bcrypt.
-USUARIOS_DEMO = {
-    "admin@hotel.com": {
-        "nome": "Administrador da Franquia",
-        "senha": "admin123",
-        "is_admin": True,
-    },
-    "cliente@hotel.com": {
-        "nome": "Cliente Demonstracao",
-        "senha": "cliente123",
-        "is_admin": False,
-    },
-}
+from app.core.database import get_db
+from app.core.security import decode_access_token
+from app.models.usuario import Usuario
 
-bearer_scheme = HTTPBearer(description="Use o token retornado por POST /auth/login")
-
-
-def autenticar_credenciais(email: str, senha: str) -> dict | None:
-    """Confere e-mail/senha por comparacao direta (SEM hash). Placeholder."""
-    usuario = USUARIOS_DEMO.get(email)
-    # Autenticacao basica: apenas um if/else comparando a senha em texto plano.
-    if usuario is None or usuario["senha"] != senha:
-        return None
-    return {"email": email, **usuario}
+# Esquema OAuth2 — espera o token Bearer no header Authorization
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/api/v1/auth/login")
 
 
 def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Depends(bearer_scheme),
-) -> dict:
-    """Valida o 'token' e retorna o usuario autenticado.
+    db: Session = Depends(get_db),
+    token: str = Depends(oauth2_scheme),
+) -> Usuario:
+    """Valida o token JWT e retorna o usuario autenticado.
 
-    VERSAO BASICA: o 'token' e simplesmente o proprio e-mail, sem
-    assinatura nem expiracao. Na Sprint 2 isto passa a decodificar um JWT.
+    Decodifica o JWT, extrai o claim `sub` (email), consulta no banco
+    e retorna o modelo Usuario. Lanca HTTP 401 se invalido.
     """
-    email = credentials.credentials
-    usuario = USUARIOS_DEMO.get(email)
+    credentials_exception = HTTPException(
+        status_code=status.HTTP_401_UNAUTHORIZED,
+        detail="Token invalido ou expirado",
+        headers={"WWW-Authenticate": "Bearer"},
+    )
+
+    payload = decode_access_token(token)
+    if payload is None:
+        raise credentials_exception
+
+    email: str = payload.get("sub")
+    if email is None:
+        raise credentials_exception
+
+    usuario = db.query(Usuario).filter(Usuario.email == email).first()
     if usuario is None:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="Token invalido",
-            headers={"WWW-Authenticate": "Bearer"},
-        )
-    return {"email": email, **usuario}
+        raise credentials_exception
+
+    return usuario
 
 
-def get_current_admin(usuario: dict = Depends(get_current_user)) -> dict:
-    """Autorizacao (RBAC) basica: exige is_admin=True. Apenas um if/else."""
-    if not usuario["is_admin"]:
+def get_current_admin(
+    current_user: Usuario = Depends(get_current_user),
+) -> Usuario:
+    """Autorizacao RBAC: exige que o usuario seja administrador.
+
+    Lanca HTTP 403 se o usuario autenticado nao possui is_admin=True.
+    """
+    if not current_user.is_admin:
         raise HTTPException(
             status_code=status.HTTP_403_FORBIDDEN,
             detail="Acesso restrito a administradores",
         )
-    return usuario
+    return current_user
