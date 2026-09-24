@@ -17,22 +17,28 @@ Este diretório contém todos os documentos de governança, padrões de código,
 * 📦 **[04. Guia de Clone do Repositório](./04_guia_clone_repositorio.md)**
   * Instruções detalhadas para clonar o repositório oficial e configurar remotes no ambiente local.
 * 📘 **[05. Playbook de Execução Diária](./05_playbook_execucao_diaria_equipe.md)**
-  * Cronograma diário das 17 tarefas (Sprints 1 a 6), anel fechado de Code Review entre os 7 integrantes e mapeamento de arquivos.
+  * Cronograma das 24 tarefas (Sprints 1 a 8), anel fechado de Code Review entre os 7 integrantes, prazos emergenciais e mapeamento de arquivos.
 * 🛠️ **[06. Guia Prático de Execução das Tasks](./06_guia_execucao_pratica_tasks.md)**
-  * Manual com comandos rápidos de terminal (copiar e colar) para checkout, commit, push e abertura de PRs com revisores definidos.
+  * Manual com comandos rápidos de terminal (copiar e colar) para checkout, commit, push e abertura de PRs com revisores definidos (Sprints 1 a 8).
+* ⚡ **[Plano Emergencial de Execução (Sprints 7 e 8)](./PLANO_EMERGENCIAL_SPRINTS_7_E_8.md)**
+  * Documento consolidado e executivo para alinhamento rápido da equipe e compartilhamento no Google Drive (Prazo: 25/09/2026 às 23:59).
 
 ---
 
 ## 🎯 Quadro Geral de Acompanhamento (Status Macro)
 
+> **⚠️ AVISO DE CRONOGRAMA REVISADO:** Todas as entregas até a **Sprint 8** devem ser concluídas até **25/09/2026 às 23:59**.
+
 | Ciclo | Sprint | Tema | Status | Entrega Principal |
 | :---: | :---: | :--- | :---: | :--- |
-| **MVP** | **S1** | Fundação e Setup do Monorepo | 🟡 Em Andamento | Docker Compose rodando + Layout Base |
-| **MVP** | **S2** | Autenticação & Autorização (JWT/RBAC) ⭐ | ⏳ Planejado | API de Auth segura + Login/Cadastro |
-| **MVP** | **S3** | Catálogo: Cidades e Hotéis | ⏳ Planejado | CRUD Admin + Listagem Pública |
-| **MVP** | **S4** | Motor de Reservas & Precificação Dinâmica | ⏳ Planejado | Cálculo de diárias e simulação |
-| **MVP** | **S5** | Vouchers & Avaliações | ⏳ Planejado | Emissão de voucher e feedback |
-| **MVP** | **S6** | Painel Administrativo & Orquestração | ⏳ Planejado | Dashboard Admin e rotas finais |
+| **MVP** | **S1** | Fundação e Setup do Monorepo | 🟢 Concluído | Docker Compose rodando + Layout Base |
+| **MVP** | **S2** | Autenticação & Autorização (JWT/RBAC) ⭐ | 🟢 Concluído | API de Auth segura + Login/Cadastro |
+| **MVP** | **S3** | Catálogo: Cidades e Hotéis | 🟢 Concluído | CRUD Admin + Listagem Pública |
+| **MVP** | **S4** | Motor de Reservas & Precificação Dinâmica | 🟢 Concluído | Cálculo de diárias e simulação |
+| **MVP** | **S5** | Vouchers & Avaliações | 🟢 Concluído | Emissão de voucher e feedback |
+| **MVP** | **S6** | Painel Administrativo & Orquestração | 🟢 Concluído | Dashboard Admin e rotas finais |
+| **Fase 2** | **S7** | Mensageria Assíncrona, Auditoria & CI/CD | 🟡 Em Andamento | Worker RabbitMQ/MongoDB + GitHub Actions |
+| **Fase 2** | **S8** | Testes E2E, Seed Completo & Release v1.0.0 | ⏳ Planejado | Suíte Pytest Domínio + Seed Banca + Main |
 
 ---
 
