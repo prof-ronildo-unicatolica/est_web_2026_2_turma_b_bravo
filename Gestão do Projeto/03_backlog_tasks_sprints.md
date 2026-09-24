@@ -3,6 +3,8 @@
 **Projeto:** Sistema de Gestão Hoteleira — Estágio II (2026.2)  
 **Equipe:** Bravo (Turma B)  
 
+> ⚠️ **AVISO DE CRONOGRAMA REVISADO:** Todas as entregas das **Sprints 1 a 8** devem ser finalizadas, testadas e integradas na branch `develop` impreterivelmente até **25/09/2026 às 23:59**.
+
 ---
 
 ## 📌 Guia de Git & Versionamento para Estagiários
@@ -407,3 +409,120 @@ Para cada subtarefa abaixo, o estagiário responsável deve seguir rigorosamente
 1. ✅ Nenhuma senha armazenada ou retornada em texto plano.
 2. ✅ Proteção funcional contra acessos não autorizados (401) e cliente tentando acessar rotas de admin (403).
 3. ✅ Suíte pytest da Sprint 2 com 100% de aprovação.
+
+---
+
+## 🏨 Sprint 3 — Domínio Hoteleiro & Catálogo de Hotéis
+> **Objetivo:** Modelagem relacional do domínio (Cidade, Hotel, Quarto, Comodidades), endpoints de catálogo e páginas frontend de busca e detalhes.
+* **TSK-301:** Modelos SQLAlchemy e Schemas Pydantic do Domínio Hoteleiro (`cidade.py`, `hotel.py`, `comodidade.py`, `quarto.py`, `hotelaria.py`).
+* **TSK-302:** Endpoints de Catálogo e Migração Alembic (`hoteis.py`, migração Alembic de domínio).
+* **TSK-303:** Telas Frontend de Busca e Detalhes da Acomodação (`HomePage.jsx`, `HotelDetailPage.jsx`).
+* **Critérios de Aceite (DoD):** CRUD de hotéis funcional, busca por cidade e filtro por comodidades operacionais.
+
+---
+
+## 💳 Sprint 4 — Motor de Reservas & Precificação Dinâmica
+> **Objetivo:** Cálculo automatizado de tarifas por temporada, endpoints de reserva e checkout interativo com cálculo em tempo real.
+* **TSK-401:** Motor de Precificação Dinâmica e Modelos de Reserva (`pricing_service.py`, `reserva.py`, `tarifa_temporada.py`).
+* **TSK-402:** Endpoints REST de Gestão de Reservas (`reservas.py` — criação, simulação e cancelamento).
+* **TSK-403:** Tela de Checkout Interativo com Cálculo em Tempo Real (`CheckoutPage.jsx`).
+* **Critérios de Aceite (DoD):** Cálculo de diárias com multiplicador de temporada correto e fluxo de reserva persistido no PostgreSQL.
+
+---
+
+## 🎫 Sprint 5 — Vouchers, Minhas Reservas & Avaliações
+> **Objetivo:** Acompanhamento de reservas pelo cliente, emissão de voucher digital e sistema de notas/avaliações de estadias.
+* **TSK-501:** Telas de Status de Reserva, Voucher Digital e Painel Minhas Reservas (`BookingStatusPage.jsx`, `MyBookingsPage.jsx`).
+* **TSK-502:** Módulo e API de Avaliações e Notas dos Hotéis (`avaliacao.py`, `avaliacoes.py`).
+* **Critérios de Aceite (DoD):** Voucher com código localizador exibido e avaliações vinculadas aos hotéis com média de estrelas.
+
+---
+
+## 📊 Sprint 6 — Painel Administrativo & Orquestração
+> **Objetivo:** Métricas gerenciais para administradores do hotel, gráficos de ocupação e roteamento geral protegido.
+* **TSK-601:** Endpoints Administrativos de Gestão e Registro Geral de Rotas (`admin.py`, `main.py`).
+* **TSK-602:** Painel Administrativo Frontend Integrado (`AdminDashboard.jsx`, rotas protegidas por RBAC).
+* **Critérios de Aceite (DoD):** Apenas administradores autenticados acessam o painel; gráficos e KPIs populados com dados de reservas.
+
+---
+
+## ⚡ Sprint 7 — Mensageria Assíncrona, Auditoria NoSQL & CI/CD Pipeline
+> **Objetivo:** Integrar a arquitetura distribuída assíncrona (RabbitMQ + MongoDB Audit Worker) e estabelecer o pipeline de integração contínua (CI/CD) no GitHub Actions.
+
+### Tarefas Técnicas
+
+#### 📋 **TSK-701: Pipeline de CI/CD Automatizado no GitHub Actions**
+* - [ ] **SUB-701.1: Configuração do Workflow de Linting e Validação Sintática**
+  * **Descrição:** Criar o arquivo `.github/workflows/ci.yml` para rodar Ruff no backend e ESLint no frontend a cada Push ou PR para `develop`.
+  * **Branch:** `chore/ci-github-actions`
+  * **Commit:** `chore(ci): implementa pipeline automatizado de testes e lint no github actions`
+* - [ ] **SUB-701.2: Execução de Testes Pytest e Build do Frontend no Pipeline**
+  * **Descrição:** Executar a suíte de testes com banco SQLite/Postgres em memória e validar que `npm run build` executa sem erros de transpilação.
+
+#### 📋 **TSK-702: Publicação e Consumo de Eventos de Auditoria no RabbitMQ & MongoDB**
+* - [ ] **SUB-702.1: Disparo de Eventos Assíncronos no Fluxo de Reservas**
+  * **Descrição:** Publicar mensagens na fila `audit.logs` do RabbitMQ quando uma reserva for criada, confirmada ou cancelada.
+  * **Branch:** `feature/rabbitmq-audit-worker`
+  * **Commit:** `feat(worker): conecta publicacao e consumo de eventos assincronos com rabbitmq e mongodb`
+* - [ ] **SUB-702.2: Resiliência do Worker Python e Gravação no MongoDB**
+  * **Descrição:** Garantir reconexão automática com `aio_pika.connect_robust` no `audit_worker.py` e gravação com timestamp ISO na coleção `logs_auditoria`.
+
+#### 📋 **TSK-703: Endpoint e Visualizador de Logs de Auditoria NoSQL no Admin**
+* - [ ] **SUB-703.1: Endpoint REST para Consulta de Logs NoSQL**
+  * **Descrição:** Criar rota `GET /api/v1/admin/logs` protegida por `get_current_admin` para consultar os últimos 50 eventos gravados no MongoDB.
+  * **Branch:** `feature/admin-audit-logs-view`
+  * **Commit:** `feat(admin): implementa consulta e aba visual de logs de auditoria assincronos`
+* - [ ] **SUB-703.2: Aba de Auditoria no Painel Administrativo**
+  * **Descrição:** Adicionar componente visual na interface do `AdminDashboard.jsx` para exibir histórico de auditoria em tempo real.
+
+### Critérios de Aceite (DoD - Sprint 7)
+1. ✅ Pipeline GitHub Actions executando com sucesso e bloqueando PRs com falha de sintaxe ou testes.
+2. ✅ Criação ou cancelamento de reserva dispara evento no RabbitMQ e gera registro na coleção do MongoDB.
+3. ✅ Painel administrativo exibe logs de auditoria do NoSQL com data, usuário e ação.
+
+---
+
+## 🏆 Sprint 8 — Suíte de Testes E2E, Seed Completo da Banca & Release Final v1.0.0
+> **Objetivo:** Garantir robustez com testes de integração do domínio hoteleiro, carga de dados realista para avaliação da banca acadêmica e consolidação da release `v1.0.0` para entrega na branch `main`.
+
+### Tarefas Técnicas
+
+#### 📋 **TSK-801: Suíte Abrangente de Testes de Integração do Domínio e Relatório de Cobertura**
+* - [ ] **SUB-801.1: Testes de Integração de Hotéis e Catálogo (`tests/test_hoteis.py`)**
+  * **Descrição:** Testar listagem pública, paginação, filtros de cidade/estrelas e resposta 404 para ID inexistente.
+  * **Branch:** `test/domain-integration-suite`
+  * **Commit:** `test(qa): implementa suite de testes de integracao para hoteis, calculo de reservas e cancelamento`
+* - [ ] **SUB-801.2: Testes de Fluxo de Reserva e Cancelamento (`tests/test_reservas.py`)**
+  * **Descrição:** Testar criação de reserva com precificação dinâmica, conflito de datas e cancelamento com permissão de proprietário/admin.
+* - [ ] **SUB-801.3: Configuração de Relatório de Cobertura Pytest-Cov**
+  * **Descrição:** Configurar métrica de cobertura de código visando atingir mais de 80% nos serviços críticos.
+
+#### 📋 **TSK-802: Script de Carga de Dados Realista (Seed Completo da Banca)**
+* - [ ] **SUB-802.1: Criação do Script `app/db/seed_demo.py`**
+  * **Descrição:** Script autônomo idempotente que insere cidades (Fortaleza, Jericoacoara, Quixadá, Guaramiranga), hotéis com imagens reais, comodidades, quartos e reservas fictícias.
+  * **Branch:** `feature/seed-catalog-demo`
+  * **Commit:** `feat(db): adiciona script de seed completo com cidades, hoteis, quartos e reservas para demonstracao`
+* - [ ] **SUB-802.2: Integração do Seed com Comando Docker Compose**
+  * **Descrição:** Permitir execução simplificada via terminal: `docker compose run --rm api python -m app.db.seed_demo`.
+
+#### 📋 **TSK-803: Polimento de UI/UX, Feedback Visual (Toasts/Loading) e Tratamento de Erros**
+* - [ ] **SUB-803.1: Sistema de Notificações Toast**
+  * **Descrição:** Adicionar feedback visual flutuante para ações de sucesso (reserva confirmada, login realizado, voucher copiado) e mensagens de erro amigáveis.
+  * **Branch:** `feature/frontend-ux-polish`
+  * **Commit:** `feat(frontend): adiciona feedback visual de toasts, skeletons e polimento de UI`
+* - [ ] **SUB-803.2: Estados de Carregamento e Tratamento de Erros 404/500**
+  * **Descrição:** Implementar skeletons e spinners durante carregamento de dados e tela amigável para rotas inexistentes.
+
+#### 📋 **TSK-804: Orquestração de Release Final, Roteiro da Banca e Tag v1.0.0**
+* - [ ] **SUB-804.1: Elaboração do Roteiro Oficial de Apresentação da Banca**
+  * **Descrição:** Criar `Gestão do Projeto/ROTEIRO_APRESENTACAO_BANCA.md` com checklist de apresentação de 15 minutos destacando todas as tecnologias exigidas pelo Prof. Ronildo.
+  * **Branch:** `chore/release-v1.0.0-prep`
+  * **Commit:** `chore(release): prepara roteiro da banca avaliadora e orquestracao final v1.0.0`
+* - [ ] **SUB-804.2: Preparação do PR Final para Branch `main` (Tag v1.0.0)**
+  * **Descrição:** Validação final da stack com `docker compose up --build` e abertura do Pull Request oficial da entrega da disciplina.
+
+### Critérios de Aceite (DoD - Sprint 8)
+1. ✅ Suíte `pytest` cobrindo fluxos de hotéis, precificação e reservas com aprovação de 100%.
+2. ✅ Script de seed popula o banco com dados visuais ricos e gráficos do admin cheios para a banca.
+3. ✅ Aplicação sobe limpa com `docker compose up` sem warnings críticos.
+4. ✅ Pull Request final para `main` aberto com documentação e roteiro de demonstração.

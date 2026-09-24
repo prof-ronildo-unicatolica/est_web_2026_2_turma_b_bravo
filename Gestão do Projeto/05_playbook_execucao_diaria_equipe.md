@@ -7,6 +7,9 @@
 
 ---
 
+> ⚠️ **ATENÇÃO — CRONOGRAMA EMERGENCIAL REVISADO:**  
+> Por determinação do calendário acadêmico/disciplina, todas as entregas das **Sprints 1 a 8 (Tarefas 1.1 até 8.4)** devem ser finalizadas, revisadas e integradas na branch `develop` **impreterivelmente até 25/09/2026 às 23:59**.
+
 ## 👥 Integrantes e Ciclo de Code Review (Anel Fechado de 7 Integrantes)
 
 Para garantir que todos os integrantes contribuam tanto na submissão de código quanto no processo de revisão (critério avaliativo da disciplina), adotamos o **anel fechado de revisão por pares**:
@@ -536,14 +539,187 @@ graph TD
 
 ---
 
-## 🎯 Resumo de Entregas por Integrante (7 Membros)
+---
 
-| Integrante | Total de PRs Criados | Total de PRs Revisados/Aprovados | Frentes de Atuação |
+### ⚡ SPRINT 7 — Mensageria Assíncrona, Auditoria NoSQL & CI/CD Pipeline
+
+---
+
+#### 📌 Dia 18 | Tarefa 7.1 — Pipeline de CI/CD Automatizado no GitHub Actions
+* **Responsável:** **Raul de Queiroz Moura**
+* **Revisor Obrigatório:** **Kelvin Barros Dias**
+* **Branch:** `chore/ci-github-actions`
+* **Arquivos:**
+  * `.github/workflows/ci.yml`
+* **Passo a passo no terminal:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b chore/ci-github-actions
+  # Criar .github/workflows/ci.yml com checagem de lint e testes automatizados
+  git add .github/workflows/ci.yml
+  git commit -m "chore(ci): implementa pipeline automatizado de testes e lint no github actions"
+  git push -u origin chore/ci-github-actions
+  ```
+* **Abertura do PR:**
+  * **Base:** `develop` | **Head:** `chore/ci-github-actions`
+  * **Título:** `[Sprint 7] Chore: Pipeline de CI/CD automatizado no GitHub Actions`
+  * **Reviewer:** Kelvin Barros Dias
+
+---
+
+#### 📌 Dia 19 | Tarefa 7.2 — Publicação e Consumo de Eventos de Auditoria no RabbitMQ & MongoDB
+* **Responsável:** **Guilherme Neves de Assis**
+* **Revisor Obrigatório:** **Francisca Bianca da Silva**
+* **Branch:** `feature/rabbitmq-audit-worker`
+* **Arquivos:**
+  * `apps/services/core-service/app/workers/audit_worker.py`
+  * `apps/services/core-service/app/core/rabbitmq.py`
+* **Passo a passo no terminal:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b feature/rabbitmq-audit-worker
+  git add apps/services/core-service/app/workers/audit_worker.py apps/services/core-service/app/core/rabbitmq.py
+  git commit -m "feat(worker): conecta publicacao e consumo de eventos assincronos com rabbitmq e mongodb"
+  git push -u origin feature/rabbitmq-audit-worker
+  ```
+* **Abertura do PR:**
+  * **Base:** `develop` | **Head:** `feature/rabbitmq-audit-worker`
+  * **Título:** `[Sprint 7] Feat: Mensageria assíncrona com RabbitMQ e Worker MongoDB`
+  * **Reviewer:** Francisca Bianca da Silva
+
+---
+
+#### 📌 Dia 20 | Tarefa 7.3 — Endpoint e Visualizador de Logs de Auditoria NoSQL no Painel Admin
+* **Responsável:** **Atyla Braga**
+* **Revisor Obrigatório:** **Paula de Freitas Mendes Barbosa**
+* **Branch:** `feature/admin-audit-logs-view`
+* **Arquivos:**
+  * `apps/services/core-service/app/api/v1/admin.py`
+  * `apps/frontend/src/pages/admin/AdminDashboard.jsx`
+* **Passo a passo no terminal:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b feature/admin-audit-logs-view
+  git add apps/services/core-service/app/api/v1/admin.py apps/frontend/src/pages/admin/AdminDashboard.jsx
+  git commit -m "feat(admin): implementa consulta e aba visual de logs de auditoria assincronos"
+  git push -u origin feature/admin-audit-logs-view
+  ```
+* **Abertura do PR:**
+  * **Base:** `develop` | **Head:** `feature/admin-audit-logs-view`
+  * **Título:** `[Sprint 7] Feat: Endpoint e tela de logs de auditoria no painel administrativo`
+  * **Reviewer:** Paula de Freitas Mendes Barbosa
+
+---
+
+### 🏆 SPRINT 8 — Suíte de Testes E2E, Seed Completo da Banca & Release Final v1.0.0
+
+---
+
+#### 📌 Dia 21 | Tarefa 8.1 — Suíte Abrangente de Testes de Integração do Domínio e Relatório de Cobertura
+* **Responsável:** **Raul de Queiroz Moura**
+* **Revisor Obrigatório:** **Atyla Braga**
+* **Branch:** `test/domain-integration-suite`
+* **Arquivos:**
+  * `apps/services/core-service/tests/test_hoteis.py`
+  * `apps/services/core-service/tests/test_reservas.py`
+* **Passo a passo no terminal:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b test/domain-integration-suite
+  git add apps/services/core-service/tests/test_hoteis.py apps/services/core-service/tests/test_reservas.py
+  git commit -m "test(qa): implementa suite de testes de integracao para hoteis, calculo de reservas e cancelamento"
+  git push -u origin test/domain-integration-suite
+  ```
+* **Abertura do PR:**
+  * **Base:** `develop` | **Head:** `test/domain-integration-suite`
+  * **Título:** `[Sprint 8] Test: Suíte completa de testes de integração para o domínio hoteleiro`
+  * **Reviewer:** Atyla Braga
+
+---
+
+#### 📌 Dia 22 | Tarefa 8.2 — Script de Carga de Dados Realista (Seed Completo da Banca)
+* **Responsável:** **Herbert Monteiro**
+* **Revisor Obrigatório:** **Guilherme Neves de Assis**
+* **Branch:** `feature/seed-catalog-demo`
+* **Arquivos:**
+  * `apps/services/core-service/app/db/seed_demo.py`
+* **Passo a passo no terminal:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b feature/seed-catalog-demo
+  git add apps/services/core-service/app/db/seed_demo.py
+  git commit -m "feat(db): adiciona script de seed completo com cidades, hoteis, quartos e reservas para demonstracao"
+  git push -u origin feature/seed-catalog-demo
+  ```
+* **Abertura do PR:**
+  * **Base:** `develop` | **Head:** `feature/seed-catalog-demo`
+  * **Título:** `[Sprint 8] Feat: Script de seed de dados completo para demonstração e banca`
+  * **Reviewer:** Guilherme Neves de Assis
+
+---
+
+#### 📌 Dia 23 | Tarefa 8.3 — Polimento de UI/UX, Feedback Visual (Toasts/Loading) e Tratamento de Erros
+* **Responsável:** **Paula de Freitas Mendes Barbosa**
+* **Revisor Obrigatório:** **Kelvin Barros Dias**
+* **Branch:** `feature/frontend-ux-polish`
+* **Arquivos:**
+  * `apps/frontend/src/components/common/Toast.jsx`
+  * `apps/frontend/src/custom.css`
+* **Passo a passo no terminal:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b feature/frontend-ux-polish
+  git add apps/frontend/src/components/common/Toast.jsx apps/frontend/src/custom.css
+  git commit -m "feat(frontend): adiciona feedback visual de toasts, skeletons e polimento de UI"
+  git push -u origin feature/frontend-ux-polish
+  ```
+* **Abertura do PR:**
+  * **Base:** `develop` | **Head:** `feature/frontend-ux-polish`
+  * **Título:** `[Sprint 8] Feat: Polimento visual de UI/UX, toasts e estados de carregamento`
+  * **Reviewer:** Kelvin Barros Dias
+
+---
+
+#### 📌 Dia 24 | Tarefa 8.4 — Orquestração de Release Final, Roteiro da Banca e Tag v1.0.0
+* **Responsáveis:** **Kelvin Barros Dias** e **Francisca Bianca da Silva**
+* **Revisor Obrigatório:** **Raul de Queiroz Moura**
+* **Branch:** `chore/release-v1.0.0-prep`
+* **Arquivos:**
+  * `Gestão do Projeto/ROTEIRO_APRESENTACAO_BANCA.md`
+  * `README.md`
+* **Passo a passo no terminal:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b chore/release-v1.0.0-prep
+  git add "Gestão do Projeto/ROTEIRO_APRESENTACAO_BANCA.md" README.md
+  git commit -m "chore(release): prepara roteiro da banca avaliadora e orquestracao final v1.0.0"
+  git push -u origin chore/release-v1.0.0-prep
+  ```
+* **Abertura do PR:**
+  * **Base:** `develop` | **Head:** `chore/release-v1.0.0-prep`
+  * **Título:** `[Sprint 8] Chore: Orquestração de entrega final e release v1.0.0 para branch main`
+  * **Reviewer:** Raul de Queiroz Moura
+
+---
+
+## 🎯 Resumo Final de Entregas por Integrante (24 Entregas - 7 Membros)
+
+> **Prazo Impreterível:** **25/09/2026 às 23:59**
+
+| Integrante | Total PRs Autor | Total PRs Revisor | Frentes de Atuação nas Sprints 1 a 8 |
 |---|:---:|:---:|---|
-| **Kelvin Barros Dias** | **3** (Dias 4, 11, 17) | **2** (Dias 8, 15) | Auth JWT, Pricing Engine e Admin Frontend |
-| **Paula de Freitas Mendes Barbosa** | **3** (Dias 3, 10, 14) | **3** (Dias 4, 11, 17) | Layout Shell, Catálogo UI e Vouchers |
-| **Guilherme Neves de Assis** | **2** (Dias 2, 9) | **3** (Dias 3, 10, 14) | DB Config, Alembic Migrations e Catálogo API |
-| **Francisca Bianca da Silva** | **3** (Dias 5, 12, 16) | **2** (Dias 2, 9) | Auth Endpoints, Reservas API e Admin Backend |
-| **Raul de Queiroz Moura** | **2** (Dias 1, 7) | **3** (Dias 5, 12, 16) | Docker/Env e Suíte de Testes Automatizados |
-| **Atyla Braga** | **2** (Dias 6, 13) | **2** (Dias 1, 7) | Telas de Auth e Tela de Checkout com Simulação |
-| **Herbert** | **2** (Dias 8, 15) | **2** (Dias 6, 13) | Modelos de Domínio e Módulo de Avaliações/Notas |
+| **Kelvin Barros Dias** | **4** (Dias 4, 11, 17, 24) | **4** (Dias 8, 15, 18, 23) | Auth JWT, Pricing Engine, Admin Frontend e Release v1.0.0 |
+| **Paula de Freitas Mendes Barbosa** | **4** (Dias 3, 10, 14, 23) | **4** (Dias 4, 11, 17, 20) | Layout Shell, Catálogo UI, Vouchers e Polimento UI/UX |
+| **Guilherme Neves de Assis** | **3** (Dias 2, 9, 19) | **4** (Dias 3, 10, 14, 22) | Conexão DB, Alembic, Catálogo API e Mensageria RabbitMQ |
+| **Francisca Bianca da Silva** | **4** (Dias 5, 12, 16, 24) | **3** (Dias 2, 9, 19) | Auth Endpoints, Reservas API, Admin Backend e Release v1.0.0 |
+| **Raul de Queiroz Moura** | **4** (Dias 1, 7, 18, 21) | **4** (Dias 5, 12, 16, 24) | Docker/Env, Testes Auth, CI/CD Actions, Testes Domínio & QA |
+| **Atyla Braga** | **3** (Dias 6, 13, 20) | **3** (Dias 1, 7, 21) | Telas Auth, Checkout Interativo e Visualizador NoSQL Admin |
+| **Herbert Monteiro** | **3** (Dias 8, 15, 22) | **3** (Dias 6, 13, 19) | Modelos Domínio, Avaliações API e Seed Completo da Banca |
+

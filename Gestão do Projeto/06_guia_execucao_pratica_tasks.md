@@ -6,6 +6,8 @@
 
 ---
 
+> ⚠️ **PRAZO EMERGENCIAL REVISADO:** Todas as entregas das **Sprints 1 a 8 (Tarefas 1.1 até 8.4)** devem ser finalizadas, revisadas e integradas na branch `develop` **impreterivelmente até 25/09/2026 às 23:59**.
+
 ## 🎯 Objetivo deste Guia
 
 Este documento é o manual prático e visual para todos os **7 integrantes** da equipe (**Kelvin, Paula, Guilherme, Bianca, Raul, Atyla e Herbert**). Ele explica exatamente **o que fazer**, **como rodar cada comando**, **como abrir o Pull Request (PR)** e **como o colega deve aprovar e mesclar** no GitHub oficial da turma.
@@ -405,14 +407,143 @@ flowchart TD
 
 ---
 
-## 🏆 4. Resumo de Contribuição por Integrante
+---
 
-| Integrante | PRs Como Autor | PRs Como Revisor |
-|---|:---:|:---:|
-| **Kelvin Barros Dias** | Dia 4, Dia 11, Dia 17 (**3 PRs**) | Dia 8, Dia 15 (**2 PRs**) |
-| **Paula de Freitas Mendes Barbosa** | Dia 3, Dia 10, Dia 14 (**3 PRs**) | Dia 4, Dia 11, Dia 17 (**3 PRs**) |
-| **Guilherme Neves de Assis** | Dia 2, Dia 9 (**2 PRs**) | Dia 3, Dia 10, Dia 14 (**3 PRs**) |
-| **Francisca Bianca da Silva** | Dia 5, Dia 12, Dia 16 (**3 PRs**) | Dia 2, Dia 9 (**2 PRs**) |
-| **Raul de Queiroz Moura** | Dia 1, Dia 7 (**2 PRs**) | Dia 5, Dia 12, Dia 16 (**3 PRs**) |
-| **Atyla Braga** | Dia 6, Dia 13 (**2 PRs**) | Dia 1, Dia 7 (**2 PRs**) |
-| **Herbert** | Dia 8, Dia 15 (**2 PRs**) | Dia 6, Dia 13 (**2 PRs**) |
+### ⚡ SPRINT 7 — Mensageria Assíncrona, Auditoria NoSQL & CI/CD Pipeline
+
+#### 📌 Dia 18 | Tarefa 7.1 — Pipeline de CI/CD Automatizado no GitHub Actions
+* **Quem executa:** **Raul de Queiroz Moura**
+* **Quem aprova o PR:** **Kelvin Barros Dias**
+* **O que faz:** Cria a automação no GitHub Actions para rodar linter e testes a cada Push ou Pull Request.
+* **Comandos para copiar e colar:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b chore/ci-github-actions
+  # Configurar workflow de automação
+  git add .github/workflows/ci.yml
+  git commit -m "chore(ci): implementa pipeline automatizado de testes e lint no github actions"
+  git push -u origin chore/ci-github-actions
+  ```
+* **No GitHub Oficial:** Abrir PR de `chore/ci-github-actions` para `develop` marcando **Kelvin** como Reviewer.
+
+---
+
+#### 📌 Dia 19 | Tarefa 7.2 — Publicação e Consumo de Eventos de Auditoria no RabbitMQ & MongoDB
+* **Quem executa:** **Guilherme Neves de Assis**
+* **Quem aprova o PR:** **Francisca Bianca da Silva**
+* **O que faz:** Conecta os eventos de criação e cancelamento de reservas à fila do RabbitMQ e garante o processamento pelo Worker no MongoDB.
+* **Comandos para copiar e colar:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b feature/rabbitmq-audit-worker
+  git add apps/services/core-service/app/workers/audit_worker.py apps/services/core-service/app/core/rabbitmq.py
+  git commit -m "feat(worker): conecta publicacao e consumo de eventos assincronos com rabbitmq e mongodb"
+  git push -u origin feature/rabbitmq-audit-worker
+  ```
+* **No GitHub Oficial:** Abrir PR de `feature/rabbitmq-audit-worker` para `develop` marcando **Bianca** como Reviewer.
+
+---
+
+#### 📌 Dia 20 | Tarefa 7.3 — Endpoint e Visualizador de Logs de Auditoria NoSQL no Painel Admin
+* **Quem executa:** **Atyla Braga**
+* **Quem aprova o PR:** **Paula de Freitas Mendes Barbosa**
+* **O que faz:** Adiciona a aba de consulta e histórico de logs de auditoria do MongoDB no painel administrativo.
+* **Comandos para copiar e colar:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b feature/admin-audit-logs-view
+  git add apps/services/core-service/app/api/v1/admin.py apps/frontend/src/pages/admin/AdminDashboard.jsx
+  git commit -m "feat(admin): implementa consulta e aba visual de logs de auditoria assincronos"
+  git push -u origin feature/admin-audit-logs-view
+  ```
+* **No GitHub Oficial:** Abrir PR de `feature/admin-audit-logs-view` para `develop` marcando **Paula** como Reviewer.
+
+---
+
+### 🏆 SPRINT 8 — Suíte de Testes E2E, Seed Completo da Banca & Release Final v1.0.0
+
+#### 📌 Dia 21 | Tarefa 8.1 — Suíte Abrangente de Testes de Integração do Domínio e Relatório de Cobertura
+* **Quem executa:** **Raul de Queiroz Moura**
+* **Quem aprova o PR:** **Atyla Braga**
+* **O que faz:** Implementa testes de ponta a ponta cobrindo rotas de hotéis, regras de reservas, cálculo de preços e cancelamentos.
+* **Comandos para copiar e colar:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b test/domain-integration-suite
+  git add apps/services/core-service/tests/test_hoteis.py apps/services/core-service/tests/test_reservas.py
+  git commit -m "test(qa): implementa suite de testes de integracao para hoteis, calculo de reservas e cancelamento"
+  git push -u origin test/domain-integration-suite
+  ```
+* **No GitHub Oficial:** Abrir PR de `test/domain-integration-suite` para `develop` marcando **Atyla** como Reviewer.
+
+---
+
+#### 📌 Dia 22 | Tarefa 8.2 — Script de Carga de Dados Realista (Seed Completo da Banca)
+* **Quem executa:** **Herbert Monteiro**
+* **Quem aprova o PR:** **Guilherme Neves de Assis**
+* **O que faz:** Cria script automatizado para popular o banco de dados com hotéis, fotos de alta qualidade, comodidades e histórico para demonstração.
+* **Comandos para copiar e colar:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b feature/seed-catalog-demo
+  git add apps/services/core-service/app/db/seed_demo.py
+  git commit -m "feat(db): adiciona script de seed completo com cidades, hoteis, quartos e reservas para demonstracao"
+  git push -u origin feature/seed-catalog-demo
+  ```
+* **No GitHub Oficial:** Abrir PR de `feature/seed-catalog-demo` para `develop` marcando **Guilherme** como Reviewer.
+
+---
+
+#### 📌 Dia 23 | Tarefa 8.3 — Polimento de UI/UX, Feedback Visual (Toasts/Loading) e Tratamento de Erros
+* **Quem executa:** **Paula de Freitas Mendes Barbosa**
+* **Quem aprova o PR:** **Kelvin Barros Dias**
+* **O que faz:** Adiciona alertas flutuantes (toasts), esqueletos de carregamento e refinamentos estéticos no frontend.
+* **Comandos para copiar e colar:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b feature/frontend-ux-polish
+  git add apps/frontend/src/components/common/Toast.jsx apps/frontend/src/custom.css
+  git commit -m "feat(frontend): adiciona feedback visual de toasts, skeletons e polimento de UI"
+  git push -u origin feature/frontend-ux-polish
+  ```
+* **No GitHub Oficial:** Abrir PR de `feature/frontend-ux-polish` para `develop` marcando **Kelvin** como Reviewer.
+
+---
+
+#### 📌 Dia 24 | Tarefa 8.4 — Orquestração de Release Final, Roteiro da Banca e Tag v1.0.0
+* **Quem executa:** **Kelvin Barros Dias** e **Francisca Bianca da Silva**
+* **Quem aprova o PR:** **Raul de Queiroz Moura**
+* **O que faz:** Elabora o roteiro oficial para a apresentação da banca avaliadora e consolida a entrega final para merge na branch `main`.
+* **Comandos para copiar e colar:**
+  ```bash
+  git checkout develop
+  git pull origin develop
+  git checkout -b chore/release-v1.0.0-prep
+  git add "Gestão do Projeto/ROTEIRO_APRESENTACAO_BANCA.md" README.md
+  git commit -m "chore(release): prepara roteiro da banca avaliadora e orquestracao final v1.0.0"
+  git push -u origin chore/release-v1.0.0-prep
+  ```
+* **No GitHub Oficial:** Abrir PR de `chore/release-v1.0.0-prep` para `develop` marcando **Raul** como Reviewer.
+
+---
+
+## 🏆 4. Resumo de Contribuição por Integrante (24 Entregas)
+
+> **⚠️ Prazo Final Impreterível:** **25/09/2026 às 23:59**
+
+| Integrante | PRs Como Autor | PRs Como Revisor | Total de Atuações |
+|---|:---:|:---:|:---:|
+| **Kelvin Barros Dias** | Dia 4, Dia 11, Dia 17, Dia 24 (**4 PRs**) | Dia 8, Dia 15, Dia 18, Dia 23 (**4 PRs**) | **8** |
+| **Paula de Freitas Mendes Barbosa** | Dia 3, Dia 10, Dia 14, Dia 23 (**4 PRs**) | Dia 4, Dia 11, Dia 17, Dia 20 (**4 PRs**) | **8** |
+| **Guilherme Neves de Assis** | Dia 2, Dia 9, Dia 19 (**3 PRs**) | Dia 3, Dia 10, Dia 14, Dia 22 (**4 PRs**) | **7** |
+| **Francisca Bianca da Silva** | Dia 5, Dia 12, Dia 16, Dia 24 (**4 PRs**) | Dia 2, Dia 9, Dia 19 (**3 PRs**) | **7** |
+| **Raul de Queiroz Moura** | Dia 1, Dia 7, Dia 18, Dia 21 (**4 PRs**) | Dia 5, Dia 12, Dia 16, Dia 24 (**4 PRs**) | **8** |
+| **Atyla Braga** | Dia 6, Dia 13, Dia 20 (**3 PRs**) | Dia 1, Dia 7, Dia 21 (**3 PRs**) | **6** |
+| **Herbert Monteiro** | Dia 8, Dia 15, Dia 22 (**3 PRs**) | Dia 6, Dia 13, Dia 19 (**3 PRs**) | **6** |
+
