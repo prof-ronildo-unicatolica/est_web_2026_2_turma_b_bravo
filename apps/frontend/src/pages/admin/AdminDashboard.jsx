@@ -3,7 +3,7 @@
  */
 
 import { useState, useEffect } from 'react'
-import { Building2, MapPin, Bed, Plus, Trash2, Edit, X } from 'lucide-react'
+import { Building2, MapPin, Bed, Plus, Trash2, Edit, X, Activity } from 'lucide-react'
 import api from '../../services/api'
 
 function AdminSection({ title, icon: Icon, children }) {
@@ -160,6 +160,71 @@ function QuartosAdmin() {
   )
 }
 
+function AuditLogsAdmin() {
+  const [logs, setLogs] = useState([])
+  const [loading, setLoading] = useState(false)
+
+  const fetchLogs = async () => {
+    setLoading(true)
+    try {
+      const res = await api.get('/admin/logs?limite=50')
+      setLogs(res.data)
+    } catch {
+      setLogs([])
+    } finally {
+      setLoading(false)
+    }
+  }
+
+  useEffect(() => {
+    fetchLogs()
+  }, [])
+
+  return (
+    <div>
+      <div className="flex justify-between items-center mb-4">
+        <span className="text-sm text-muted">Exibindo os últimos 50 eventos capturados pelo RabbitMQ e persistidos no MongoDB</span>
+        <button className="btn btn-outline btn-sm" onClick={fetchLogs} disabled={loading}>
+          {loading ? 'Atualizando...' : 'Atualizar Logs'}
+        </button>
+      </div>
+
+      {logs.length === 0 ? (
+        <div className="text-center py-6 text-muted">Nenhum evento de auditoria registrado ainda.</div>
+      ) : (
+        <div style={{ maxHeight: '350px', overflowY: 'auto' }}>
+          <table className="table">
+            <thead>
+              <tr>
+                <th>Evento</th>
+                <th>Detalhes / Payload</th>
+                <th>Timestamp UTC</th>
+              </tr>
+            </thead>
+            <tbody>
+              {logs.map((log, idx) => (
+                <tr key={idx}>
+                  <td>
+                    <span className="badge badge-primary">{log.evento || 'log'}</span>
+                  </td>
+                  <td>
+                    <code style={{ fontSize: '0.8rem', background: 'var(--surface-color)', padding: '2px 6px', borderRadius: '4px' }}>
+                      {JSON.stringify(log, null, 1)}
+                    </code>
+                  </td>
+                  <td className="text-sm text-muted whitespace-nowrap">
+                    {log.timestamp ? new Date(log.timestamp).toLocaleString('pt-BR') : '-'}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+      )}
+    </div>
+  )
+}
+
 export default function AdminDashboard() {
   const [stats, setStats] = useState({ cidades: 0, hoteis: 0, quartos: 0 })
 
@@ -222,6 +287,7 @@ export default function AdminDashboard() {
           </div>
         </div>
 
+
         {/* CRUDs */}
         <AdminSection title="Cidades" icon={MapPin}>
           <CidadesAdmin />
@@ -234,7 +300,12 @@ export default function AdminDashboard() {
         <AdminSection title="Quartos" icon={Bed}>
           <QuartosAdmin />
         </AdminSection>
+
+        <AdminSection title="Auditoria NoSQL (MongoDB & RabbitMQ)" icon={Activity}>
+          <AuditLogsAdmin />
+        </AdminSection>
       </div>
     </div>
   )
 }
+
