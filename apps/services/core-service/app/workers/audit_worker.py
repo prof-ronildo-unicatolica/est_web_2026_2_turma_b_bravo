@@ -2,8 +2,10 @@ import asyncio
 import json
 import logging
 from datetime import datetime
+
 import aio_pika
 from motor.motor_asyncio import AsyncIOMotorClient
+
 from app.core.config import settings
 
 logger = logging.getLogger("audit_worker")

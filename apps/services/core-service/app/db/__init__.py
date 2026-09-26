@@ -5,17 +5,19 @@ Executar via: python -m app.db.seed
 """
 
 import logging
+from datetime import date
+
 from sqlalchemy.orm import Session
+
 from app.core.database import SessionLocal
 from app.core.security import get_password_hash
-from app.models.usuario import Usuario
 from app.models.cidade import Cidade
+from app.models.comodidade import Comodidade
 from app.models.hotel import Hotel
 from app.models.quarto import Quarto
-from app.models.comodidade import Comodidade
 from app.models.servico_adicional import ServicoAdicional
 from app.models.tarifa_temporada import TarifaTemporada
-from datetime import date
+from app.models.usuario import Usuario
 
 logger = logging.getLogger(__name__)
 

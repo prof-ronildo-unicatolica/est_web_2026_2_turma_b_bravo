@@ -1,6 +1,5 @@
 """Testes de autenticacao — registro, login e RBAC."""
 
-import pytest
 
 
 class TestAuthRegister:

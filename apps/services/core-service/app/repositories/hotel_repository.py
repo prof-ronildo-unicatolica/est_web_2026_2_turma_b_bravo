@@ -1,6 +1,6 @@
 from sqlalchemy.orm import Session, joinedload
 
-from app.models.hotel import Cidade, Hotel
+from app.models.hotel import Hotel
 
 
 class HotelRepository:

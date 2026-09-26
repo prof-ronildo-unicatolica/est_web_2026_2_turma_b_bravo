@@ -3,7 +3,7 @@
  */
 
 import { useState, useEffect } from 'react'
-import { Building2, MapPin, Bed, Plus, Trash2, Edit, X, Activity } from 'lucide-react'
+import { Building2, MapPin, Bed, Plus, Trash2, Activity } from 'lucide-react'
 import api from '../../services/api'
 
 function AdminSection({ title, icon: Icon, children }) {

@@ -4,15 +4,8 @@
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Search, Star, MapPin, Wifi, Waves, Dumbbell, Sparkles } from 'lucide-react'
+import { Search, Star, MapPin } from 'lucide-react'
 import api from '../services/api'
-
-const ICON_MAP = {
-  wifi: Wifi,
-  waves: Waves,
-  dumbbell: Dumbbell,
-  sparkles: Sparkles,
-}
 
 function StarRating({ rating, count }) {
   return (
