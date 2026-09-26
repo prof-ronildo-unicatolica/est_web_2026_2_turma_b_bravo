@@ -3,7 +3,7 @@
  */
 
 import { Link, useNavigate } from 'react-router-dom'
-import { Building2, LogOut, User, LayoutDashboard } from 'lucide-react'
+import { Building2, LogOut, LayoutDashboard } from 'lucide-react'
 import { useAuth } from '../../contexts/AuthContext'
 
 export default function Navbar() {

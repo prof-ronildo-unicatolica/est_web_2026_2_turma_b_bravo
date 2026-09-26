@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
-import { Calendar, AlertCircle, Star } from 'lucide-react'
+import { Calendar, Star } from 'lucide-react'
 import api from '../services/api'
 
 const STATUS_MAP = {
@@ -24,6 +24,8 @@ export default function MyBookingsPage() {
   useEffect(() => {
     fetchReservas()
   }, [])
+
+
 
   const fetchReservas = async () => {
     try {

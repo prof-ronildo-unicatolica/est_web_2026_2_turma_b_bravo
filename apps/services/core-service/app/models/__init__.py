@@ -5,29 +5,24 @@ outros componentes do sistema consigam descobrir todas as tabelas
 automaticamente a partir de `Base.metadata`.
 """
 
-# Base declarativa (definida em tutorial.py para manter compatibilidade)
-from app.models.tutorial import Base
-
-# Models do dominio hoteleiro
-from app.models.usuario import Usuario
+from app.models.avaliacao import Avaliacao
 from app.models.cidade import Cidade
 from app.models.comodidade import Comodidade, hotel_comodidade
 from app.models.hotel import Hotel
 from app.models.quarto import Quarto
-from app.models.tarifa_temporada import TarifaTemporada
-from app.models.servico_adicional import ServicoAdicional
 from app.models.reserva import Reserva, reserva_servico
-from app.models.avaliacao import Avaliacao
-
-# Models do tutorial (mantidos para compatibilidade com migracao inicial)
+from app.models.servico_adicional import ServicoAdicional
+from app.models.tarifa_temporada import TarifaTemporada
 from app.models.tutorial import (
+    Base,
+    Disciplina,
+    Linguagem,
     Professor,
     ProfessorDetail,
-    Disciplina,
     Stack,
     Tecnologia,
-    Linguagem,
 )
+from app.models.usuario import Usuario
 
 __all__ = [
     "Base",

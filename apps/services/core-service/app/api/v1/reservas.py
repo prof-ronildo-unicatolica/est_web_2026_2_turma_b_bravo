@@ -8,17 +8,17 @@ Endpoints:
 - POST /reservas/simular: Simula preco sem criar reserva
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
-from sqlalchemy.orm import Session, joinedload
+from fastapi import APIRouter, Depends, HTTPException
+from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_user
 from app.core.database import get_db
 from app.core.rabbitmq import publish_event
-from app.models.reserva import Reserva
 from app.models.quarto import Quarto
+from app.models.reserva import Reserva
 from app.models.servico_adicional import ServicoAdicional
 from app.models.usuario import Usuario
-from app.schemas.hotelaria import ReservaCreate, ReservaCancelRequest, ReservaResponse
+from app.schemas.hotelaria import ReservaCancelRequest, ReservaCreate, ReservaResponse
 from app.services.pricing_service import calcular_preco
 
 router = APIRouter(prefix="/reservas", tags=["Reservas"])

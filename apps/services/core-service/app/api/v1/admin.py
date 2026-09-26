@@ -4,7 +4,7 @@ Gerencia: Cidades, Hoteis, Quartos, Comodidades, Servicos Adicionais, Tarifas de
 Todas as rotas exigem autenticacao JWT + perfil de administrador.
 """
 
-from fastapi import APIRouter, Depends, HTTPException, status
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
 from app.api.deps import get_current_admin
@@ -15,7 +15,6 @@ from app.models.hotel import Hotel
 from app.models.quarto import Quarto
 from app.models.servico_adicional import ServicoAdicional
 from app.models.tarifa_temporada import TarifaTemporada
-from app.models.usuario import Usuario
 from app.schemas.hotelaria import (
     CidadeCreate,
     CidadeResponse,
@@ -251,3 +250,31 @@ def excluir_tarifa(tarifa_id: int, db: Session = Depends(get_db)):
         raise HTTPException(status_code=404, detail="Tarifa nao encontrada")
     db.delete(tarifa)
     db.commit()
+
+
+# ──── AUDITORIA NOSQL (MONGODB) ───────────────────────────────────────────
+
+
+@router.get("/logs")
+async def listar_logs_auditoria(limite: int = 50):
+    """Consulta os últimos eventos de auditoria assíncrona gravados no MongoDB."""
+    from motor.motor_asyncio import AsyncIOMotorClient
+
+    from app.core.config import settings
+
+    try:
+        mongo_client = AsyncIOMotorClient(settings.MONGODB_URL, serverSelectionTimeoutMS=2000)
+        db = mongo_client[settings.MONGODB_DB]
+        cursor = db["logs_auditoria"].find({}, {"_id": 0}).sort("timestamp", -1).limit(limite)
+        logs = await cursor.to_list(length=limite)
+        return logs
+    except Exception as e:
+        # Fallback gracioso se MongoDB estiver indisponível
+        return [
+            {
+                "evento": "aviso.mongodb_offline",
+                "detalhes": f"Não foi possível obter logs do MongoDB: {str(e)}",
+                "timestamp": "N/A",
+            }
+        ]
+

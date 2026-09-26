@@ -3,7 +3,7 @@
 Endpoints acessiveis sem autenticacao (exceto onde indicado).
 """
 
-from fastapi import APIRouter, Depends, Query
+from fastapi import APIRouter, Depends
 from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 
@@ -11,18 +11,18 @@ from app.core.database import get_db
 from app.models.avaliacao import Avaliacao
 from app.models.hotel import Hotel
 from app.models.quarto import Quarto
+from app.models.servico_adicional import ServicoAdicional
+from app.models.tarifa_temporada import TarifaTemporada
 from app.schemas.hotelaria import (
-    ComodidadeResponse,
+    AvaliacaoResponse,
     CidadeResponse,
+    ComodidadeResponse,
     HotelDetailResponse,
     HotelListResponse,
     QuartoResponse,
-    AvaliacaoResponse,
     ServicoResponse,
     TarifaResponse,
 )
-from app.models.servico_adicional import ServicoAdicional
-from app.models.tarifa_temporada import TarifaTemporada
 
 router = APIRouter(prefix="/hoteis", tags=["Hotéis (público)"])
 
