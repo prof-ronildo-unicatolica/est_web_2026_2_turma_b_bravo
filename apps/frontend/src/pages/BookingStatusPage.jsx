@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react'
 import { useParams, Link } from 'react-router-dom'
-import { CheckCircle, Calendar, MapPin, CreditCard, Clock } from 'lucide-react'
+import { CheckCircle, Calendar, CreditCard, Clock } from 'lucide-react'
 import api from '../services/api'
 
 const STATUS_MAP = {
@@ -21,7 +21,9 @@ export default function BookingStatusPage() {
 
   useEffect(() => {
     fetchReserva()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reservaId])
+
 
   const fetchReserva = async () => {
     try {

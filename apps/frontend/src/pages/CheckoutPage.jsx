@@ -32,11 +32,12 @@ export default function CheckoutPage() {
 
   useEffect(() => {
     fetchData()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [quartoId])
 
   const fetchData = async () => {
     try {
-      const [quartoRes, servicosRes] = await Promise.all([
+      const [, servicosRes] = await Promise.all([
         api.get(`/hoteis/auxiliar/servicos`),
         api.get(`/hoteis/auxiliar/servicos`),
       ])
@@ -77,7 +78,9 @@ export default function CheckoutPage() {
     if (form.checkin && form.checkout) {
       handleSimular()
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [form])
+
 
   const handleSubmit = async (e) => {
     e.preventDefault()

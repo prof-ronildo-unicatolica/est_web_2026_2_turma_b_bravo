@@ -4,7 +4,7 @@
 
 import { useState, useEffect } from 'react'
 import { useParams, Link, useNavigate } from 'react-router-dom'
-import { Star, MapPin, ArrowLeft, Wifi, Check } from 'lucide-react'
+import { Star, MapPin, ArrowLeft, Check } from 'lucide-react'
 import api from '../services/api'
 import { useAuth } from '../contexts/AuthContext'
 
@@ -17,7 +17,9 @@ export default function HotelDetailPage() {
 
   useEffect(() => {
     fetchHotel()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id])
+
 
   const fetchHotel = async () => {
     try {
