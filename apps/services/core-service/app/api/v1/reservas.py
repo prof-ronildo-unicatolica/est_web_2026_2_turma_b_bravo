@@ -8,6 +8,8 @@ Endpoints:
 - POST /reservas/simular: Simula preco sem criar reserva
 """
 
+from uuid import UUID
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy.orm import Session
 
@@ -142,7 +144,7 @@ def minhas_reservas(
 
 @router.get("/{reserva_id}", response_model=ReservaResponse)
 def detalhe_reserva(
-    reserva_id: str,
+    reserva_id: UUID,
     db: Session = Depends(get_db),
     current_user: Usuario = Depends(get_current_user),
 ):
@@ -157,7 +159,7 @@ def detalhe_reserva(
 
 @router.post("/{reserva_id}/cancelar", response_model=ReservaResponse)
 async def cancelar_reserva(
-    reserva_id: str,
+    reserva_id: UUID,
     payload: ReservaCancelRequest,
     db: Session = Depends(get_db),
     current_user: Usuario = Depends(get_current_user),
