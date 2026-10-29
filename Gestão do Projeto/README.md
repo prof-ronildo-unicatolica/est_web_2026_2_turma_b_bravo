@@ -20,6 +20,8 @@ Este diretório contém todos os documentos de governança, padrões de código,
   * Cronograma das 24 tarefas (Sprints 1 a 8), anel fechado de Code Review entre os 7 integrantes, prazos emergenciais e mapeamento de arquivos.
 * 🛠️ **[06. Guia Prático de Execução das Tasks](./06_guia_execucao_pratica_tasks.md)**
   * Manual com comandos rápidos de terminal (copiar e colar) para checkout, commit, push e abertura de PRs com revisores definidos (Sprints 1 a 8).
+* 🏆 **[07. Plano de Ajustes de Qualidade (7 Integrantes)](./07_plano_ajustes_qualidade_7_integrantes.md)**
+  * Divisão das pendências dos relatórios de qualidade (Confiabilidade, Manutenibilidade, Complexidade, Testes e Segurança) para todos os 7 integrantes da equipe, com branches exclusivas e anel fechado de code review.
 * ⚡ **[Plano Emergencial de Execução (Sprints 7 e 8)](./PLANO_EMERGENCIAL_SPRINTS_7_E_8.md)**
   * Documento consolidado e executivo para alinhamento rápido da equipe e compartilhamento no Google Drive (Prazo: 25/09/2026 às 23:59).
 
