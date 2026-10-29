@@ -20,7 +20,10 @@ class Settings(BaseSettings):
         return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_SERVER}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
 
     # Configurações do MongoDB
-    MONGODB_URL: str = "mongodb://admin:admin123@localhost:27017"
+    # ATENÇÃO: Não definir credenciais reais aqui. Usar variável de ambiente
+    # MONGODB_URL no arquivo .env ou no docker-compose.yml.
+    # Exemplo: MONGODB_URL=mongodb://admin:SUA_SENHA@mongodb:27017
+    MONGODB_URL: str = "mongodb://localhost:27017"
     MONGODB_DB: str = "hotel_mongo_dev"
 
     # Configurações do RabbitMQ
