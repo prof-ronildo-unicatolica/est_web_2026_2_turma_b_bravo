@@ -4,22 +4,24 @@ Projeto: StayFlow (Equipe Bravo - Estágio II 2026.2)
 Executar via:
     python -m app.db.seed_demo
 ou
-    docker compose run --rm api python -m app.db.seed_demo
+    docker compose run --rm core-service poetry run python -m app.db.seed_demo
 """
 
 import logging
 from datetime import date, timedelta
+
 from sqlalchemy.orm import Session
+
 from app.core.database import SessionLocal
 from app.core.security import get_password_hash
-from app.models.usuario import Usuario
 from app.models.cidade import Cidade
+from app.models.comodidade import Comodidade
 from app.models.hotel import Hotel
 from app.models.quarto import Quarto
-from app.models.comodidade import Comodidade
+from app.models.reserva import Reserva
 from app.models.servico_adicional import ServicoAdicional
 from app.models.tarifa_temporada import TarifaTemporada
-from app.models.reserva import Reserva
+from app.models.usuario import Usuario
 
 logging.basicConfig(level=logging.INFO, format="%(asctime)s [%(levelname)s] %(message)s")
 logger = logging.getLogger("seed_demo")
@@ -30,10 +32,30 @@ def seed_demo_data(db: Session):
 
     # 1. Usuários
     usuarios_data = [
-        {"nome": "Prof. Ronildo (Avaliador)", "email": "ronildo@unicatolica.edu.br", "senha": "banca2026", "admin": True},
-        {"nome": "Kelvin Barros (Líder)", "email": "kelvin@hotel.com", "senha": "kelvin123", "admin": True},
-        {"nome": "Paula Mendes (Cliente)", "email": "paula@hotel.com", "senha": "paula123", "admin": False},
-        {"nome": "Lucas Silveira (Hóspede)", "email": "lucas@cliente.com", "senha": "cliente123", "admin": False},
+        {
+            "nome": "Prof. Ronildo (Avaliador)",
+            "email": "ronildo@unicatolica.edu.br",
+            "senha": "banca2026",
+            "admin": True,
+        },
+        {
+            "nome": "Kelvin Barros (Líder)",
+            "email": "kelvin@hotel.com",
+            "senha": "kelvin123",
+            "admin": True,
+        },
+        {
+            "nome": "Paula Mendes (Cliente)",
+            "email": "paula@hotel.com",
+            "senha": "paula123",
+            "admin": False,
+        },
+        {
+            "nome": "Lucas Silveira (Hóspede)",
+            "email": "lucas@cliente.com",
+            "senha": "cliente123",
+            "admin": False,
+        },
     ]
 
     usuarios_criados = {}
@@ -72,7 +94,7 @@ def seed_demo_data(db: Session):
             logger.info(f"Cidade criada: {nome}/{estado}")
         cidades_criadas[nome] = cid
 
-    # 3. Comodidades
+    # 3. Comodidades e Serviços Adicionais
     comodidades_nomes = [
         "Wi-Fi de Alta Velocidade",
         "Piscina com Borda Infinita",
@@ -93,7 +115,52 @@ def seed_demo_data(db: Session):
             db.refresh(comod)
         comodidades_objs.append(comod)
 
-    # 4. Hotéis com Imagens Realistas
+    servicos_dados = [
+        {
+            "nome": "Café da Manhã Colonial",
+            "preco": 45.0,
+            "descricao": "Buffet completo com frutas regionais e tapiocas feitas na hora.",
+        },
+        {
+            "nome": "Transfer Aeroporto / Hotel",
+            "preco": 120.0,
+            "descricao": "Transporte executivo com ar-condicionado direto para o hotel.",
+        },
+        {
+            "nome": "Massagem Relaxante no Spa (50min)",
+            "preco": 180.0,
+            "descricao": "Sessão individual com óleos essenciais e aromaterapia.",
+        },
+    ]
+    for s_data in servicos_dados:
+        serv = db.query(ServicoAdicional).filter(ServicoAdicional.nome == s_data["nome"]).first()
+        if not serv:
+            serv = ServicoAdicional(
+                nome=s_data["nome"],
+                preco=s_data["preco"],
+                descricao=s_data["descricao"],
+            )
+            db.add(serv)
+            db.commit()
+            db.refresh(serv)
+            logger.info(f"Serviço adicional criado: {serv.nome} (R$ {serv.preco})")
+
+    # 4. Tarifas de Temporada (Precificação Dinâmica)
+    tarifa_alta = db.query(TarifaTemporada).filter(TarifaTemporada.nome == "Alta Temporada Verão").first()
+    if not tarifa_alta:
+        tarifa_alta = TarifaTemporada(
+            nome="Alta Temporada Verão",
+            data_inicio=date(2027, 1, 1),
+            data_fim=date(2027, 2, 28),
+            multiplicador=1.25,
+            hotel_id=None,
+        )
+        db.add(tarifa_alta)
+        db.commit()
+        db.refresh(tarifa_alta)
+        logger.info("Tarifa de temporada criada: Alta Temporada Verão (+25%)")
+
+    # 5. Hotéis com Imagens Realistas
     hoteis_dados = [
         {
             "nome": "Monólitos Resort & Spa",
@@ -103,8 +170,20 @@ def seed_demo_data(db: Session):
             "descricao": "Resort integrado à paisagem mágica dos monólitos de Quixadá. Experiência de descanso, astronomia e alta gastronomia regional.",
             "capa": "https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?auto=format&fit=crop&w=1200&q=80",
             "quartos": [
-                {"tipo": "SUITE_MASTER", "desc": "Suíte Imperial com Vista para a Pedra da Galinha Choca", "adultos": 2, "criancas": 2, "preco": 550.0},
-                {"tipo": "LUXO", "desc": "Apartamento Luxo com Varanda e Banheira de Hidromassagem", "adultos": 2, "criancas": 1, "preco": 380.0},
+                {
+                    "tipo": "SUITE_MASTER",
+                    "desc": "Suíte Imperial com Vista para a Pedra da Galinha Choca",
+                    "adultos": 2,
+                    "criancas": 2,
+                    "preco": 550.0,
+                },
+                {
+                    "tipo": "LUXO",
+                    "desc": "Apartamento Luxo com Varanda e Banheira de Hidromassagem",
+                    "adultos": 2,
+                    "criancas": 1,
+                    "preco": 380.0,
+                },
             ],
         },
         {
@@ -115,8 +194,20 @@ def seed_demo_data(db: Session):
             "descricao": "Hotel de luxo em frente à orla de Fortaleza, com piscina de borda infinita, restaurante de frutos do mar e acesso direto à praia.",
             "capa": "https://images.unsplash.com/photo-1571896349842-33c89424de2d?auto=format&fit=crop&w=1200&q=80",
             "quartos": [
-                {"tipo": "SUITE_PRESIDENCIAL", "desc": "Suíte Frente Mar com Jacuzzi Panorâmica", "adultos": 2, "criancas": 2, "preco": 850.0},
-                {"tipo": "STANDARD", "desc": "Quarto Standard Executivo com Cama King", "adultos": 2, "criancas": 0, "preco": 320.0},
+                {
+                    "tipo": "SUITE_PRESIDENCIAL",
+                    "desc": "Suíte Frente Mar com Jacuzzi Panorâmica",
+                    "adultos": 2,
+                    "criancas": 2,
+                    "preco": 850.0,
+                },
+                {
+                    "tipo": "STANDARD",
+                    "desc": "Quarto Standard Executivo com Cama King",
+                    "adultos": 2,
+                    "criancas": 0,
+                    "preco": 320.0,
+                },
             ],
         },
         {
@@ -127,7 +218,13 @@ def seed_demo_data(db: Session):
             "descricao": "Charme rústico pé na areia com pôr do sol inesquecível na Duna, café da manhã tropical e passeios de buggy.",
             "capa": "https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?auto=format&fit=crop&w=1200&q=80",
             "quartos": [
-                {"tipo": "BUNGALOW_DELUXE", "desc": "Bangalô Tropical com Rede na Varanda", "adultos": 2, "criancas": 1, "preco": 490.0},
+                {
+                    "tipo": "BUNGALOW_DELUXE",
+                    "desc": "Bangalô Tropical com Rede na Varanda",
+                    "adultos": 2,
+                    "criancas": 1,
+                    "preco": 490.0,
+                },
             ],
         },
         {
@@ -138,7 +235,13 @@ def seed_demo_data(db: Session):
             "descricao": "Clima ameno da serra cearense, fondue à noite, lareira ecológica e trilhas pela mata atlântica nativa.",
             "capa": "https://images.unsplash.com/photo-1566073771259-6a8506099945?auto=format&fit=crop&w=1200&q=80",
             "quartos": [
-                {"tipo": "CHALE_ROMANTICO", "desc": "Chalé Suíço com Lareira e Vista para a Serra", "adultos": 2, "criancas": 0, "preco": 420.0},
+                {
+                    "tipo": "CHALE_ROMANTICO",
+                    "desc": "Chalé Suíço com Lareira e Vista para a Serra",
+                    "adultos": 2,
+                    "criancas": 0,
+                    "preco": 420.0,
+                },
             ],
         },
     ]
@@ -164,7 +267,9 @@ def seed_demo_data(db: Session):
             logger.info(f"Hotel criado: {hotel.nome} em {cid.nome}")
 
         for q_data in h_data["quartos"]:
-            quarto = db.query(Quarto).filter(Quarto.hotel_id == hotel.id, Quarto.tipo == q_data["tipo"]).first()
+            quarto = db.query(Quarto).filter(
+                Quarto.hotel_id == hotel.id, Quarto.tipo == q_data["tipo"]
+            ).first()
             if not quarto:
                 quarto = Quarto(
                     hotel_id=hotel.id,
@@ -181,7 +286,7 @@ def seed_demo_data(db: Session):
                 logger.info(f"Quarto criado: {quarto.tipo} (R$ {quarto.preco_diaria}/dia)")
             quartos_criados.append(quarto)
 
-    # 5. Reservas Fictícias Demonstrativas
+    # 6. Reservas Fictícias Demonstrativas
     cliente_paula = usuarios_criados["paula@hotel.com"]
     if quartos_criados:
         q1 = quartos_criados[0]
