@@ -21,11 +21,21 @@ from app.models.usuario import Usuario
 
 logger = logging.getLogger(__name__)
 
+# Constantes de comodidades para evitar repetição de strings literais
+COMOD_WIFI = "Wi-Fi Gratuito"
+COMOD_PISCINA = "Piscina"
+COMOD_ACADEMIA = "Academia"
+COMOD_ESTACIONAMENTO = "Estacionamento"
+COMOD_RESTAURANTE = "Restaurante"
+COMOD_SPA = "SPA"
+COMOD_BAR = "Bar"
+COMOD_ROOM_SERVICE = "Room Service"
+COMOD_AR_CONDICIONADO = "Ar Condicionado"
+COMOD_LAVANDERIA = "Lavanderia"
 
-def seed_database(db: Session):
-    """Popula o banco com dados iniciais de demonstracao."""
 
-    # --- 1. Usuario Admin ---
+def _seed_usuarios(db: Session) -> None:
+    """Insere usuarios padrao (admin e cliente de teste)."""
     if not db.query(Usuario).filter(Usuario.email == "admin@hotel.com").first():
         admin = Usuario(
             nome="Administrador StayFlow",
@@ -36,7 +46,6 @@ def seed_database(db: Session):
         db.add(admin)
         logger.info("Seed: Usuario admin criado.")
 
-    # --- Usuario Cliente de teste ---
     if not db.query(Usuario).filter(Usuario.email == "cliente@hotel.com").first():
         cliente = Usuario(
             nome="Maria Santos",
@@ -49,7 +58,9 @@ def seed_database(db: Session):
 
     db.flush()
 
-    # --- 2. Cidades ---
+
+def _seed_cidades(db: Session) -> dict[str, Cidade]:
+    """Insere cidades de demonstracao e retorna mapa por nome."""
     cidades_data = [
         ("Fortaleza", "CE"),
         ("São Paulo", "SP"),
@@ -71,19 +82,22 @@ def seed_database(db: Session):
             db.flush()
         cidades[nome] = cidade
     logger.info(f"Seed: {len(cidades)} cidades.")
+    return cidades
 
-    # --- 3. Comodidades ---
+
+def _seed_comodidades(db: Session) -> dict[str, Comodidade]:
+    """Insere comodidades padrao e retorna mapa por nome."""
     comodidades_data = [
-        ("Wi-Fi Gratuito", "wifi"),
-        ("Piscina", "waves"),
-        ("Academia", "dumbbell"),
-        ("Estacionamento", "car"),
-        ("Restaurante", "utensils"),
-        ("SPA", "sparkles"),
-        ("Bar", "wine"),
-        ("Room Service", "concierge-bell"),
-        ("Ar Condicionado", "snowflake"),
-        ("Lavanderia", "shirt"),
+        (COMOD_WIFI, "wifi"),
+        (COMOD_PISCINA, "waves"),
+        (COMOD_ACADEMIA, "dumbbell"),
+        (COMOD_ESTACIONAMENTO, "car"),
+        (COMOD_RESTAURANTE, "utensils"),
+        (COMOD_SPA, "sparkles"),
+        (COMOD_BAR, "wine"),
+        (COMOD_ROOM_SERVICE, "concierge-bell"),
+        (COMOD_AR_CONDICIONADO, "snowflake"),
+        (COMOD_LAVANDERIA, "shirt"),
     ]
     comodidades = {}
     for nome, icone in comodidades_data:
@@ -94,8 +108,11 @@ def seed_database(db: Session):
             db.flush()
         comodidades[nome] = comod
     logger.info(f"Seed: {len(comodidades)} comodidades.")
+    return comodidades
 
-    # --- 4. Servicos Adicionais ---
+
+def _seed_servicos_adicionais(db: Session) -> None:
+    """Insere servicos adicionais disponiveis para reserva."""
     servicos_data = [
         ("Café da Manhã Premium", 30.0, "Buffet completo com opções gourmet"),
         ("Translado Aeroporto", 120.0, "Transfer ida e volta do aeroporto"),
@@ -108,70 +125,85 @@ def seed_database(db: Session):
     db.flush()
     logger.info("Seed: Servicos adicionais.")
 
-    # --- 5. Hoteis ---
+
+def _criar_quartos_do_hotel(db: Session, hotel_id: int, estrelas: int) -> None:
+    """Cria os quartos tipicos para um hotel com base nas estrelas."""
+    quartos = [
+        ("Simples", 1, 0, 180.0 * estrelas / 3),
+        ("Casal Luxo", 2, 0, 280.0 * estrelas / 3),
+        ("Família Premium", 2, 2, 380.0 * estrelas / 3),
+        ("Suíte Master", 2, 1, 520.0 * estrelas / 3),
+    ]
+    for tipo, adultos, criancas, preco in quartos:
+        quarto = Quarto(
+            hotel_id=hotel_id,
+            tipo=tipo,
+            capacidade_adultos=adultos,
+            capacidade_criancas=criancas,
+            preco_diaria=round(preco, 2),
+        )
+        db.add(quarto)
+
+
+def _seed_hoteis_e_quartos(
+    db: Session, cidades: dict[str, Cidade], comodidades: dict[str, Comodidade]
+) -> None:
+    """Insere catalogo de hoteis com suas comodidades e quartos."""
     hoteis_data = [
         ("Hotel Beira-Mar Fortaleza", 5, "Fortaleza", "Resort de luxo na Praia do Meireles com vista para o mar.", [
-            "Wi-Fi Gratuito", "Piscina", "Academia", "Restaurante", "SPA", "Bar", "Room Service", "Ar Condicionado",
+            COMOD_WIFI, COMOD_PISCINA, COMOD_ACADEMIA, COMOD_RESTAURANTE, COMOD_SPA, COMOD_BAR, COMOD_ROOM_SERVICE, COMOD_AR_CONDICIONADO,
         ]),
         ("Pousada Jericoacoara", 4, "Fortaleza", "Pousada aconchegante em Jericoacoara com clima rústico e sofisticado.", [
-            "Wi-Fi Gratuito", "Piscina", "Restaurante", "Bar", "Ar Condicionado",
+            COMOD_WIFI, COMOD_PISCINA, COMOD_RESTAURANTE, COMOD_BAR, COMOD_AR_CONDICIONADO,
         ]),
         ("Grand São Paulo Hotel", 5, "São Paulo", "Hotel de negócios e lazer na Avenida Paulista.", [
-            "Wi-Fi Gratuito", "Academia", "Restaurante", "Bar", "Room Service", "Ar Condicionado", "Lavanderia",
+            COMOD_WIFI, COMOD_ACADEMIA, COMOD_RESTAURANTE, COMOD_BAR, COMOD_ROOM_SERVICE, COMOD_AR_CONDICIONADO, COMOD_LAVANDERIA,
         ]),
         ("Copacabana Palace Inn", 5, "Rio de Janeiro", "Experiência premium na orla de Copacabana.", [
-            "Wi-Fi Gratuito", "Piscina", "Academia", "Restaurante", "SPA", "Bar", "Room Service", "Estacionamento", "Ar Condicionado",
+            COMOD_WIFI, COMOD_PISCINA, COMOD_ACADEMIA, COMOD_RESTAURANTE, COMOD_SPA, COMOD_BAR, COMOD_ROOM_SERVICE, COMOD_ESTACIONAMENTO, COMOD_AR_CONDICIONADO,
         ]),
         ("Pousada do Pelourinho", 3, "Salvador", "Charme histórico no coração do Pelourinho.", [
-            "Wi-Fi Gratuito", "Restaurante", "Bar", "Ar Condicionado",
+            COMOD_WIFI, COMOD_RESTAURANTE, COMOD_BAR, COMOD_AR_CONDICIONADO,
         ]),
         ("Serra Gaúcha Resort", 4, "Gramado", "Refúgio nas montanhas com lareira e fondue.", [
-            "Wi-Fi Gratuito", "Restaurante", "SPA", "Bar", "Room Service", "Estacionamento",
+            COMOD_WIFI, COMOD_RESTAURANTE, COMOD_SPA, COMOD_BAR, COMOD_ROOM_SERVICE, COMOD_ESTACIONAMENTO,
         ]),
         ("Floripa Beach Hotel", 4, "Florianópolis", "Hotel moderno próximo às praias de Florianópolis.", [
-            "Wi-Fi Gratuito", "Piscina", "Academia", "Restaurante", "Estacionamento", "Ar Condicionado",
+            COMOD_WIFI, COMOD_PISCINA, COMOD_ACADEMIA, COMOD_RESTAURANTE, COMOD_ESTACIONAMENTO, COMOD_AR_CONDICIONADO,
         ]),
         ("Hotel Ponta Negra", 3, "Natal", "Hotel aconchegante na Praia de Ponta Negra.", [
-            "Wi-Fi Gratuito", "Piscina", "Restaurante", "Ar Condicionado",
+            COMOD_WIFI, COMOD_PISCINA, COMOD_RESTAURANTE, COMOD_AR_CONDICIONADO,
         ]),
     ]
 
     for nome_hotel, estrelas, cidade_nome, desc, amenidades in hoteis_data:
         hotel = db.query(Hotel).filter(Hotel.nome == nome_hotel).first()
-        if not hotel:
-            hotel = Hotel(
-                nome=nome_hotel,
-                estrelas=estrelas,
-                cidade_id=cidades[cidade_nome].id,
-                descricao=desc,
-            )
-            for amenidade_nome in amenidades:
-                if amenidade_nome in comodidades:
-                    hotel.comodidades.append(comodidades[amenidade_nome])
-            db.add(hotel)
-            db.flush()
+        if hotel:
+            continue
 
-            # Quartos para cada hotel
-            quartos = [
-                ("Simples", 1, 0, 180.0 * estrelas / 3),
-                ("Casal Luxo", 2, 0, 280.0 * estrelas / 3),
-                ("Família Premium", 2, 2, 380.0 * estrelas / 3),
-                ("Suíte Master", 2, 1, 520.0 * estrelas / 3),
-            ]
-            for tipo, adultos, criancas, preco in quartos:
-                quarto = Quarto(
-                    hotel_id=hotel.id,
-                    tipo=tipo,
-                    capacidade_adultos=adultos,
-                    capacidade_criancas=criancas,
-                    preco_diaria=round(preco, 2),
-                )
-                db.add(quarto)
+        cidade = cidades.get(cidade_nome)
+        cidade_id = cidade.id if cidade else None
+
+        hotel = Hotel(
+            nome=nome_hotel,
+            estrelas=estrelas,
+            cidade_id=cidade_id,
+            descricao=desc,
+        )
+        for amenidade_nome in amenidades:
+            if amenidade_nome in comodidades:
+                hotel.comodidades.append(comodidades[amenidade_nome])
+        db.add(hotel)
+        db.flush()
+
+        _criar_quartos_do_hotel(db, hotel.id, estrelas)
 
     db.flush()
     logger.info("Seed: Hoteis e quartos.")
 
-    # --- 6. Tarifas de Temporada ---
+
+def _seed_tarifas(db: Session) -> None:
+    """Insere tarifas sazonais configuradas."""
     tarifas_data = [
         ("Alta Temporada - Verão", date(2027, 1, 1), date(2027, 3, 1), 1.3),
         ("Réveillon", date(2026, 12, 20), date(2027, 1, 5), 1.5),
@@ -184,6 +216,15 @@ def seed_database(db: Session):
             ))
     logger.info("Seed: Tarifas de temporada.")
 
+
+def seed_database(db: Session) -> None:
+    """Popula o banco com dados iniciais de demonstracao."""
+    _seed_usuarios(db)
+    cidades = _seed_cidades(db)
+    comodidades = _seed_comodidades(db)
+    _seed_servicos_adicionais(db)
+    _seed_hoteis_e_quartos(db, cidades, comodidades)
+    _seed_tarifas(db)
     db.commit()
     logger.info("Seed completo!")
 

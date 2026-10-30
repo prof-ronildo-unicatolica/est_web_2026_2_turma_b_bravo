@@ -498,12 +498,12 @@ Para cada subtarefa abaixo, o estagiário responsável deve seguir rigorosamente
   * **Descrição:** Configurar métrica de cobertura de código visando atingir mais de 80% nos serviços críticos.
 
 #### 📋 **TSK-802: Script de Carga de Dados Realista (Seed Completo da Banca)**
-* - [ ] **SUB-802.1: Criação do Script `app/db/seed_demo.py`**
+* - [x] **SUB-802.1: Criação do Script `app/db/seed_demo.py`**
   * **Descrição:** Script autônomo idempotente que insere cidades (Fortaleza, Jericoacoara, Quixadá, Guaramiranga), hotéis com imagens reais, comodidades, quartos e reservas fictícias.
   * **Branch:** `feature/seed-catalog-demo`
   * **Commit:** `feat(db): adiciona script de seed completo com cidades, hoteis, quartos e reservas para demonstracao`
-* - [ ] **SUB-802.2: Integração do Seed com Comando Docker Compose**
-  * **Descrição:** Permitir execução simplificada via terminal: `docker compose run --rm api python -m app.db.seed_demo`.
+* - [x] **SUB-802.2: Integração do Seed com Comando Docker Compose**
+  * **Descrição:** Permitir execução simplificada via terminal: `docker compose run --rm core-service poetry run python -m app.db.seed_demo`.
 
 #### 📋 **TSK-803: Polimento de UI/UX, Feedback Visual (Toasts/Loading) e Tratamento de Erros**
 * - [ ] **SUB-803.1: Sistema de Notificações Toast**
