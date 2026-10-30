@@ -6,6 +6,9 @@ from sqlalchemy.orm import Mapped, mapped_column, relationship
 from app.models.comodidade import hotel_comodidade
 from app.models.tutorial import Base
 
+# Cascata padrao dos relacionamentos filhos (remove filhos junto com o hotel)
+CASCADE_ALL_DELETE_ORPHAN = "all, delete-orphan"
+
 
 class Hotel(Base):
     __tablename__ = "hoteis"
@@ -22,16 +25,16 @@ class Hotel(Base):
     # Relacionamentos
     cidade: Mapped["Cidade"] = relationship(back_populates="hoteis")  # noqa: F821
     quartos: Mapped[list["Quarto"]] = relationship(  # noqa: F821
-        back_populates="hotel", cascade="all, delete-orphan"
+        back_populates="hotel", cascade=CASCADE_ALL_DELETE_ORPHAN
     )
     comodidades: Mapped[list["Comodidade"]] = relationship(  # noqa: F821
         secondary=hotel_comodidade, back_populates="hoteis"
     )
     avaliacoes: Mapped[list["Avaliacao"]] = relationship(  # noqa: F821
-        back_populates="hotel", cascade="all, delete-orphan"
+        back_populates="hotel", cascade=CASCADE_ALL_DELETE_ORPHAN
     )
     tarifas_temporada: Mapped[list["TarifaTemporada"]] = relationship(  # noqa: F821
-        back_populates="hotel", cascade="all, delete-orphan"
+        back_populates="hotel", cascade=CASCADE_ALL_DELETE_ORPHAN
     )
 
     def __repr__(self) -> str:
