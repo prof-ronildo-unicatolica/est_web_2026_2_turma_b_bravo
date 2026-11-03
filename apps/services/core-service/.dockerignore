@@ -1,9 +1,42 @@
-.venv
+# Segredos e configurações locais — NUNCA devem entrar na imagem
+.env
+.env.*
+!.env.exemplo
+
+# Controle de versão
+.git
+.gitignore
+.gitattributes
+.github
+
+# Dependências de Node (frontend)
+node_modules
+
+# Cache do Python
 __pycache__
 *.pyc
 *.pyo
-.git
-.github
+*.pyd
+.Python
+
+# Cache do pytest e cobertura
 .pytest_cache
+.coverage
+htmlcov/
+
+# Ambiente virtual Python (se existir localmente)
+.venv
+venv/
+
+# Ferramentas de qualidade e IDE
 .ruff_cache
+.mypy_cache
+.idea
+.vscode
+
+# Banco de dados de testes local
 test.db
+
+# Artefatos de build
+dist/
+build/
