@@ -7,16 +7,19 @@ import { Link } from 'react-router-dom'
 import { Search, Star, MapPin } from 'lucide-react'
 import api from '../services/api'
 
+const STAR_POSITIONS = [1, 2, 3, 4, 5]
+
 function StarRating({ rating, count }) {
+  const filledStars = Math.round(rating || 0)
   return (
     <div className="flex items-center gap-1">
       <div className="stars">
-        {[1, 2, 3, 4, 5].map((i) => (
+        {STAR_POSITIONS.map((position) => (
           <Star
-            key={i}
+            key={`star-${position}`}
             size={14}
-            className={`star ${i <= Math.round(rating || 0) ? 'filled' : ''}`}
-            fill={i <= Math.round(rating || 0) ? 'currentColor' : 'none'}
+            className={`star ${position <= filledStars ? 'filled' : ''}`}
+            fill={position <= filledStars ? 'currentColor' : 'none'}
           />
         ))}
       </div>

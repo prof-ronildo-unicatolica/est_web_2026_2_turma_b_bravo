@@ -5,7 +5,14 @@
  * Persiste dados no localStorage para sobreviver a refreshes.
  */
 
-import { createContext, useContext, useState, useEffect } from 'react'
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 import api from '../services/api'
 
 const AuthContext = createContext(null)
@@ -26,7 +33,7 @@ export function AuthProvider({ children }) {
     setLoading(false)
   }, [])
 
-  const login = async (email, senha) => {
+  const login = useCallback(async (email, senha) => {
     const response = await api.post('/auth/login', { email, senha })
     const { access_token } = response.data
     localStorage.setItem('stayflow_token', access_token)
@@ -41,31 +48,39 @@ export function AuthProvider({ children }) {
     setUser(userData)
 
     return userData
-  }
+  }, [])
 
-  const register = async (nome, email, senha) => {
-    await api.post('/auth/register', { nome, email, senha })
-    // Faz login automatico apos cadastro
-    return await login(email, senha)
-  }
+  const register = useCallback(
+    async (nome, email, senha) => {
+      await api.post('/auth/register', { nome, email, senha })
+      // Faz login automatico apos cadastro
+      return await login(email, senha)
+    },
+    [login]
+  )
 
-  const logout = () => {
+  const logout = useCallback(() => {
     localStorage.removeItem('stayflow_token')
     localStorage.removeItem('stayflow_user')
     setToken(null)
     setUser(null)
-  }
+  }, [])
 
-  const value = {
-    user,
-    token,
-    loading,
-    login,
-    register,
-    logout,
-    isAuthenticated: !!token,
-    isAdmin: user?.is_admin ?? false,
-  }
+  // Identidade estável do value: só muda quando algum dado de sessão muda,
+  // evitando re-render de todos os consumidores a cada render do Provider.
+  const value = useMemo(
+    () => ({
+      user,
+      token,
+      loading,
+      login,
+      register,
+      logout,
+      isAuthenticated: !!token,
+      isAdmin: user?.is_admin ?? false,
+    }),
+    [user, token, loading, login, register, logout]
+  )
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>
 }
