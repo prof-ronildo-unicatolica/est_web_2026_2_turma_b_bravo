@@ -407,6 +407,16 @@ h1, h2, h3, h4, h5, h6 {
 .star.interactive { cursor: pointer; transition: transform var(--transition-fast); }
 .star.interactive:hover { transform: scale(1.2); }
 
+/* Estrela clicável do seletor de nota: botão sem borda, acessível por teclado */
+.star-button {
+  padding: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  line-height: 0;
+  cursor: pointer;
+}
+
 /* ──── Footer ─────────────────────────────────────────────────────────── */
 .footer {
   background: var(--color-bg-dark);
