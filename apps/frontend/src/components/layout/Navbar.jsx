@@ -45,7 +45,7 @@ export default function Navbar() {
                   Admin
                 </Link>
               )}
-              <button onClick={handleLogout} className="btn btn-ghost btn-sm btn-nav">
+              <button type="button" onClick={handleLogout} className="btn btn-ghost btn-sm btn-nav">
                 <LogOut size={14} />
                 Sair
               </button>
