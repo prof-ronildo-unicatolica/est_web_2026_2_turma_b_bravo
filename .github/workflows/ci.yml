@@ -59,7 +59,7 @@ jobs:
           RABBITMQ_URL: "amqp://guest:guest@localhost:5672/"
         run: |
           echo "==> Executando suíte de testes..."
-          pytest tests/ -v --tb=short
+          pytest tests/ -v --tb=short --cov=app/services --cov-report=term-missing --cov-fail-under=70
 
   # ----------------------------------------------------------
   # JOB 2 — Build do Frontend (Vite)
