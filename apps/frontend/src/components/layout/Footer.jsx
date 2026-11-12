@@ -31,9 +31,9 @@ export default function Footer() {
           <div>
             <h4>Suporte</h4>
             <ul>
-              <li><a href="#">Central de Ajuda</a></li>
-              <li><a href="#">Termos de Uso</a></li>
-              <li><a href="#">Política de Privacidade</a></li>
+              <li><a href="mailto:contato@stayflow.com.br">Central de Ajuda</a></li>
+              <li className="text-sm">Termos de Uso</li>
+              <li className="text-sm">Política de Privacidade</li>
             </ul>
           </div>
           <div>
