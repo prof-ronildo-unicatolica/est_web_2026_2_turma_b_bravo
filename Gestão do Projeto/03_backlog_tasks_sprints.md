@@ -518,11 +518,11 @@ Para cada subtarefa abaixo, o estagiário responsável deve seguir rigorosamente
   * **Descrição:** Criar `Gestão do Projeto/ROTEIRO_APRESENTACAO_BANCA.md` com checklist de apresentação de 15 minutos destacando todas as tecnologias exigidas pelo Prof. Ronildo.
   * **Branch:** `chore/release-v1.0.0-prep`
   * **Commit:** `chore(release): prepara roteiro da banca avaliadora e orquestracao final v1.0.0`
-* - [x] **SUB-804.2: Preparação do PR Final para Branch `main` (Tag v1.0.0)**
+* - [ ] **SUB-804.2: Preparação do PR Final para Branch `main` (Tag v1.0.0)**
   * **Descrição:** Validação final da stack com `docker compose up --build` e abertura do Pull Request oficial da entrega da disciplina.
 
 ### Critérios de Aceite (DoD - Sprint 8)
 1. ✅ Suíte `pytest` cobrindo fluxos de hotéis, precificação e reservas com aprovação de 100%.
 2. ✅ Script de seed popula o banco com dados visuais ricos e gráficos do admin cheios para a banca.
 3. ✅ Aplicação sobe limpa com `docker compose up` sem warnings críticos.
-4. ✅ Pull Request final para `main` aberto com documentação e roteiro de demonstração.
+4. ⏳ Pull Request final para `main` (Tag v1.0.0) em preparação após aprovação do roteiro.

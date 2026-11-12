@@ -20,7 +20,7 @@ A plataforma implementa uma arquitetura orientada a serviços em **Monorepo**, c
   * **PostgreSQL:** Transações relacionais consistentes (Cidades, Hotéis, Quartos, Reservas, Tarifas e Usuários).
   * **MongoDB:** Persistência NoSQL orientada a documentos para trilhas de auditoria assíncrona.
 * **Mensageria Assíncrona Distribuída:** Broker **RabbitMQ** com filas duráveis (`audit.logs`) consumidas por Worker assíncrono Python (`aio-pika`).
-* **Qualidade e Confiabilidade SonarQube:** Código em conformidade com **Rating A** nos 5 eixos (Confiabilidade, Manutenibilidade, Baixa Complexidade, Razão de Testes RNFO07 e Segurança).
+* **Qualidade e Confiabilidade:** Correções e refatorações aplicadas nos 5 eixos do SonarQube (Confiabilidade, Manutenibilidade, Complexidade, Razão de Testes RNFO07 e Segurança), visando elevação para **Rating A** (aguardando reanálise da banca).
 * **CI/CD Automatizado:** Pipeline de integração contínua via **GitHub Actions** com Ruff, ESLint e Pytest.
 * **Orquestração e Contêineres:** **Docker Compose** orquestrando toda a infraestrutura e microsserviços.
 
@@ -98,13 +98,13 @@ A plataforma implementa uma arquitetura orientada a serviços em **Monorepo**, c
 ---
 
 ### 🔹 Bloco 4 — Padrões de Qualidade e SonarQube (3 minutos)
-1. **Evolução de Rating (C ➔ A):**
-   * Apresentar a resolução dos relatórios de inconformidade nos 5 eixos:
-     * **Confiabilidade:** Eliminação de `datetime.utcnow()` legado, repasse correto de `asyncio.CancelledError` e botões HTML tipados.
-     * **Manutenibilidade:** Padronização de todas as exceções HTTP no Swagger e centralização de constantes.
-     * **Complexidade Cognitiva:** Modularização de componentes JSX (`AdminDashboard`, `CheckoutPage`) e decomposição da inicialização do banco de dados.
-     * **Testes Automatizados:** Cumprimento da razão de testes e requisito **RNFO07** (mínimo de 70% de cobertura nos serviços do Core Service).
-     * **Segurança:** Hardening dos contêineres Docker, criação de `.dockerignore` dedicado e segregação estrita de variáveis de ambiente do MongoDB/RabbitMQ.
+1. **Plano de Ajustes de Qualidade (7 Integrantes):**
+   * Apresentar as correções implementadas para os 5 relatórios de inconformidade, visando atingir o Rating A:
+     * **Confiabilidade:** Eliminação de `datetime.utcnow()` legado no backend, repasse correto de `asyncio.CancelledError` no worker de auditoria e botões HTML com `type` explícito no frontend.
+     * **Manutenibilidade:** Padronização e documentação de todas as exceções HTTP no Swagger (`responses={400: ..., 404: ...}`) e centralização de constantes literais.
+     * **Complexidade Cognitiva:** Modularização de componentes JSX (`AdminDashboard`, `CheckoutPage`, `HotelDetailPage`) e decomposição da inicialização do banco de dados.
+     * **Testes Automatizados:** Cumprimento da razão de testes e do requisito **RNFO07** (mínimo de 70% de cobertura na camada de serviços do backend, com gate automatizado no CI).
+     * **Segurança:** Hardening do Dockerfile (cópias direcionadas de contexto), criação de `.dockerignore` dedicado para exclusão de arquivos sensíveis e parametrização de variáveis via `.env.exemplo`.
 2. **Governança Git:**
    * Anel fechado de Code Review entre os 7 integrantes, 100% de conformidade com Conventional Commits e zero commits diretos na `main` ou `develop`.
 
@@ -143,7 +143,7 @@ docker compose exec core-service python -m app.db.seed_demo
 | **Frontend Web (React)** | [http://localhost:5173](http://localhost:5173) | Interface principal do sistema |
 | **API Backend + Swagger UI** | [http://localhost:8000/docs](http://localhost:8000/docs) | Documentação interativa da API |
 | **RabbitMQ Management Dashboard** | [http://localhost:15672](http://localhost:15672) | Usuário: `guest` / Senha: `guest` |
-| **PostgreSQL Database** | `localhost:5432` | Banco relacional `hotel_db` |
+| **PostgreSQL Database** | `localhost:5432` | Banco relacional `hotel_db_dev` |
 | **MongoDB NoSQL** | `localhost:27017` | Coleções `logs_auditoria` e catálogo |
 
 ### Credenciais Padrão de Demonstração
@@ -161,7 +161,8 @@ docker compose exec core-service python -m app.db.seed_demo
 |---|---|
 | **Sprints Executadas** | **8 de 8 (100% Concluído)** |
 | **Integrantes com Contribuições Ativas** | **7 de 7 (100% Equidade)** |
-| **Pull Requests Revisados e Mesclados** | **31 Pull Requests** |
-| **Rating Geral no SonarQube** | **Rating A** (Todos os 5 eixos atendidos) |
+| **Pull Requests Revisados e Mesclados** | **38 Pull Requests** (e PR #69 em revisão) |
+| **Plano de Qualidade SonarQube** | **Correções nos 5 eixos aplicadas** (visando Rating A / aguardando reanálise) |
 | **Cobertura da Camada de Serviços** | **≥ 70% (Requisito RNFO07 Atendido)** |
 | **Pipeline de CI/CD** | **GitHub Actions Automatizado e 100% Verde** |
+

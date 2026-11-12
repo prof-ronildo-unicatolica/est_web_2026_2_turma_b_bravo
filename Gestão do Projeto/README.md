@@ -40,8 +40,8 @@ Este diretório contém todos os documentos de governança, padrões de código,
 | **MVP** | **S5** | Vouchers & Avaliações | 🟢 Concluído | Emissão de voucher e feedback |
 | **MVP** | **S6** | Painel Administrativo & Orquestração | 🟢 Concluído | Dashboard Admin e rotas finais |
 | **Fase 2** | **S7** | Mensageria Assíncrona, Auditoria & CI/CD | 🟢 Concluído | Worker RabbitMQ/MongoDB + GitHub Actions |
-| **Fase 2** | **S8** | Testes E2E, Seed Completo & Release v1.0.0 | 🟢 Concluído | Suíte Pytest Domínio + Seed Banca + Roteiro Final |
-| **Qualidade** | **Ajustes** | Plano de Qualidade SonarQube (7 Integrantes) | 🟢 Concluído | Rating A nos 5 eixos + 7 PRs Mesclados |
+| **Fase 2** | **S8** | Testes E2E, Seed Completo & Release v1.0.0 | 🟡 Em Fase Final | Suíte Pytest Domínio + Seed Banca + Roteiro (PR final em prep.) |
+| **Qualidade** | **Ajustes** | Plano de Qualidade (7 Integrantes) | 🟢 Concluído | 7 PRs mesclados nos 5 eixos (visando Rating A / aguardando reanálise) |
 
 ---
 
