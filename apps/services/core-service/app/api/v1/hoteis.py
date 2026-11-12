@@ -3,7 +3,7 @@
 Endpoints acessiveis sem autenticacao (exceto onde indicado).
 """
 
-from fastapi import APIRouter, Depends
+from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import func
 from sqlalchemy.orm import Session, joinedload
 
@@ -25,6 +25,9 @@ from app.schemas.hotelaria import (
 )
 
 router = APIRouter(prefix="/hoteis", tags=["Hotéis (público)"])
+
+MSG_HOTEL_NAO_ENCONTRADO = "Hotel nao encontrado"
+RESPOSTA_HOTEL_404 = {404: {"description": MSG_HOTEL_NAO_ENCONTRADO}}
 
 
 @router.get("", response_model=list[HotelListResponse])
@@ -80,7 +83,9 @@ def listar_hoteis(
     return result
 
 
-@router.get("/{hotel_id}", response_model=HotelDetailResponse)
+@router.get(
+    "/{hotel_id}", response_model=HotelDetailResponse, responses=RESPOSTA_HOTEL_404
+)
 def detalhe_hotel(hotel_id: int, db: Session = Depends(get_db)):
     """Detalhes completos de um hotel: quartos, comodidades, avaliacoes."""
     hotel = (
@@ -96,8 +101,7 @@ def detalhe_hotel(hotel_id: int, db: Session = Depends(get_db)):
     )
 
     if not hotel:
-        from fastapi import HTTPException
-        raise HTTPException(status_code=404, detail="Hotel nao encontrado")
+        raise HTTPException(status_code=404, detail=MSG_HOTEL_NAO_ENCONTRADO)
 
     avg_nota = (
         db.query(func.avg(Avaliacao.nota))
