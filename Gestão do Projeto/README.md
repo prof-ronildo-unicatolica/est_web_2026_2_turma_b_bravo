@@ -24,12 +24,12 @@ Este diretório contém todos os documentos de governança, padrões de código,
   * Divisão das pendências dos relatórios de qualidade (Confiabilidade, Manutenibilidade, Complexidade, Testes e Segurança) para todos os 7 integrantes da equipe, com branches exclusivas e anel fechado de code review.
 * ⚡ **[Plano Emergencial de Execução (Sprints 7 e 8)](./PLANO_EMERGENCIAL_SPRINTS_7_E_8.md)**
   * Documento consolidado e executivo para alinhamento rápido da equipe e compartilhamento no Google Drive (Prazo: 25/09/2026 às 23:59).
+* 🎯 **[Roteiro Oficial de Apresentação da Banca](./ROTEIRO_APRESENTACAO_BANCA.md)**
+  * Roteiro cronometrado de 20 minutos para a banca avaliadora, com credenciais de demonstração, comandos de execução rápida e mapa de arquitetura.
 
 ---
 
 ## 🎯 Quadro Geral de Acompanhamento (Status Macro)
-
-> **⚠️ AVISO DE CRONOGRAMA REVISADO:** Todas as entregas até a **Sprint 8** devem ser concluídas até **25/09/2026 às 23:59**.
 
 | Ciclo | Sprint | Tema | Status | Entrega Principal |
 | :---: | :---: | :--- | :---: | :--- |
@@ -39,8 +39,9 @@ Este diretório contém todos os documentos de governança, padrões de código,
 | **MVP** | **S4** | Motor de Reservas & Precificação Dinâmica | 🟢 Concluído | Cálculo de diárias e simulação |
 | **MVP** | **S5** | Vouchers & Avaliações | 🟢 Concluído | Emissão de voucher e feedback |
 | **MVP** | **S6** | Painel Administrativo & Orquestração | 🟢 Concluído | Dashboard Admin e rotas finais |
-| **Fase 2** | **S7** | Mensageria Assíncrona, Auditoria & CI/CD | 🟡 Em Andamento | Worker RabbitMQ/MongoDB + GitHub Actions |
-| **Fase 2** | **S8** | Testes E2E, Seed Completo & Release v1.0.0 | ⏳ Planejado | Suíte Pytest Domínio + Seed Banca + Main |
+| **Fase 2** | **S7** | Mensageria Assíncrona, Auditoria & CI/CD | 🟢 Concluído | Worker RabbitMQ/MongoDB + GitHub Actions |
+| **Fase 2** | **S8** | Testes E2E, Seed Completo & Release v1.0.0 | 🟡 Em Fase Final | Suíte Pytest Domínio + Seed Banca + Roteiro (PR final em prep.) |
+| **Qualidade** | **Ajustes** | Plano de Qualidade (7 Integrantes) | 🟢 Concluído | 7 PRs mesclados nos 5 eixos (visando Rating A / aguardando reanálise) |
 
 ---
 
