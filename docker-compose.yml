@@ -62,13 +62,13 @@ services:
     restart: unless-stopped
     environment:
       - POSTGRES_SERVER=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=hotel_db_dev
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-hotel_db_dev}
       - POSTGRES_PORT=5432
-      - MONGODB_URL=mongodb://admin:admin123@mongodb:27017
-      - MONGODB_DB=hotel_mongo_dev
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - MONGODB_URL=${MONGODB_URL:-mongodb://admin:admin123@mongodb:27017}
+      - MONGODB_DB=${MONGODB_DB:-hotel_mongo_dev}
+      - RABBITMQ_URL=${RABBITMQ_URL:-amqp://guest:guest@rabbitmq:5672/}
     ports:
       - "8000:8000"
     depends_on:
@@ -93,13 +93,13 @@ services:
     restart: unless-stopped
     environment:
       - POSTGRES_SERVER=postgres
-      - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=postgres
-      - POSTGRES_DB=hotel_db_dev
+      - POSTGRES_USER=${POSTGRES_USER:-postgres}
+      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD:-postgres}
+      - POSTGRES_DB=${POSTGRES_DB:-hotel_db_dev}
       - POSTGRES_PORT=5432
-      - MONGODB_URL=mongodb://admin:admin123@mongodb:27017
-      - MONGODB_DB=hotel_mongo_dev
-      - RABBITMQ_URL=amqp://guest:guest@rabbitmq:5672/
+      - MONGODB_URL=${MONGODB_URL:-mongodb://admin:admin123@mongodb:27017}
+      - MONGODB_DB=${MONGODB_DB:-hotel_mongo_dev}
+      - RABBITMQ_URL=${RABBITMQ_URL:-amqp://guest:guest@rabbitmq:5672/}
     depends_on:
       postgres:
         condition: service_healthy
