@@ -22,6 +22,7 @@ Desenvolvimento Web** — 2026.2.
 * 📅 **[Backlog de Tasks e Sprints](./Gestão%20do%20Projeto/03_backlog_tasks_sprints.md)**: Planejamento detalhado das Sprints, Histórias de Usuário e Definition of Done.
 * 📘 **[Playbook de Execução Diária](./Gestão%20do%20Projeto/05_playbook_execucao_diaria_equipe.md)**: Cronograma e ciclo de Code Review fechado para a equipe de 7 membros.
 * 🛠️ **[Guia Prático de Execução das Tasks](./Gestão%20do%20Projeto/06_guia_execucao_pratica_tasks.md)**: Passo a passo de terminal para extração, commits, PRs e aprovação das 17 tasks.
+* 🎯 **[Roteiro Oficial de Apresentação da Banca](./Gestão%20do%20Projeto/ROTEIRO_APRESENTACAO_BANCA.md)**: Guia completo para os 20 minutos de banca avaliadora com credenciais, rotas e arquitetura.
 
 
 ## Começando

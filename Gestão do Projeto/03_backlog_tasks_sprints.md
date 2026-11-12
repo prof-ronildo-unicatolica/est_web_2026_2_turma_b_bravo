@@ -452,27 +452,27 @@ Para cada subtarefa abaixo, o estagiário responsável deve seguir rigorosamente
 ### Tarefas Técnicas
 
 #### 📋 **TSK-701: Pipeline de CI/CD Automatizado no GitHub Actions**
-* - [ ] **SUB-701.1: Configuração do Workflow de Linting e Validação Sintática**
+* - [x] **SUB-701.1: Configuração do Workflow de Linting e Validação Sintática**
   * **Descrição:** Criar o arquivo `.github/workflows/ci.yml` para rodar Ruff no backend e ESLint no frontend a cada Push ou PR para `develop`.
   * **Branch:** `chore/ci-github-actions`
   * **Commit:** `chore(ci): implementa pipeline automatizado de testes e lint no github actions`
-* - [ ] **SUB-701.2: Execução de Testes Pytest e Build do Frontend no Pipeline**
+* - [x] **SUB-701.2: Execução de Testes Pytest e Build do Frontend no Pipeline**
   * **Descrição:** Executar a suíte de testes com banco SQLite/Postgres em memória e validar que `npm run build` executa sem erros de transpilação.
 
 #### 📋 **TSK-702: Publicação e Consumo de Eventos de Auditoria no RabbitMQ & MongoDB**
-* - [ ] **SUB-702.1: Disparo de Eventos Assíncronos no Fluxo de Reservas**
+* - [x] **SUB-702.1: Disparo de Eventos Assíncronos no Fluxo de Reservas**
   * **Descrição:** Publicar mensagens na fila `audit.logs` do RabbitMQ quando uma reserva for criada, confirmada ou cancelada.
   * **Branch:** `feature/rabbitmq-audit-worker`
   * **Commit:** `feat(worker): conecta publicacao e consumo de eventos assincronos com rabbitmq e mongodb`
-* - [ ] **SUB-702.2: Resiliência do Worker Python e Gravação no MongoDB**
+* - [x] **SUB-702.2: Resiliência do Worker Python e Gravação no MongoDB**
   * **Descrição:** Garantir reconexão automática com `aio_pika.connect_robust` no `audit_worker.py` e gravação com timestamp ISO na coleção `logs_auditoria`.
 
 #### 📋 **TSK-703: Endpoint e Visualizador de Logs de Auditoria NoSQL no Admin**
-* - [ ] **SUB-703.1: Endpoint REST para Consulta de Logs NoSQL**
+* - [x] **SUB-703.1: Endpoint REST para Consulta de Logs NoSQL**
   * **Descrição:** Criar rota `GET /api/v1/admin/logs` protegida por `get_current_admin` para consultar os últimos 50 eventos gravados no MongoDB.
   * **Branch:** `feature/admin-audit-logs-view`
   * **Commit:** `feat(admin): implementa consulta e aba visual de logs de auditoria assincronos`
-* - [ ] **SUB-703.2: Aba de Auditoria no Painel Administrativo**
+* - [x] **SUB-703.2: Aba de Auditoria no Painel Administrativo**
   * **Descrição:** Adicionar componente visual na interface do `AdminDashboard.jsx` para exibir histórico de auditoria em tempo real.
 
 ### Critérios de Aceite (DoD - Sprint 7)
@@ -488,13 +488,13 @@ Para cada subtarefa abaixo, o estagiário responsável deve seguir rigorosamente
 ### Tarefas Técnicas
 
 #### 📋 **TSK-801: Suíte Abrangente de Testes de Integração do Domínio e Relatório de Cobertura**
-* - [ ] **SUB-801.1: Testes de Integração de Hotéis e Catálogo (`tests/test_hoteis.py`)**
+* - [x] **SUB-801.1: Testes de Integração de Hotéis e Catálogo (`tests/test_hoteis.py`)**
   * **Descrição:** Testar listagem pública, paginação, filtros de cidade/estrelas e resposta 404 para ID inexistente.
   * **Branch:** `test/domain-integration-suite`
   * **Commit:** `test(qa): implementa suite de testes de integracao para hoteis, calculo de reservas e cancelamento`
-* - [ ] **SUB-801.2: Testes de Fluxo de Reserva e Cancelamento (`tests/test_reservas.py`)**
+* - [x] **SUB-801.2: Testes de Fluxo de Reserva e Cancelamento (`tests/test_reservas.py`)**
   * **Descrição:** Testar criação de reserva com precificação dinâmica, conflito de datas e cancelamento com permissão de proprietário/admin.
-* - [ ] **SUB-801.3: Configuração de Relatório de Cobertura Pytest-Cov**
+* - [x] **SUB-801.3: Configuração de Relatório de Cobertura Pytest-Cov**
   * **Descrição:** Configurar métrica de cobertura de código visando atingir mais de 80% nos serviços críticos.
 
 #### 📋 **TSK-802: Script de Carga de Dados Realista (Seed Completo da Banca)**
@@ -506,19 +506,19 @@ Para cada subtarefa abaixo, o estagiário responsável deve seguir rigorosamente
   * **Descrição:** Permitir execução simplificada via terminal: `docker compose run --rm core-service poetry run python -m app.db.seed_demo`.
 
 #### 📋 **TSK-803: Polimento de UI/UX, Feedback Visual (Toasts/Loading) e Tratamento de Erros**
-* - [ ] **SUB-803.1: Sistema de Notificações Toast**
+* - [x] **SUB-803.1: Sistema de Notificações Toast**
   * **Descrição:** Adicionar feedback visual flutuante para ações de sucesso (reserva confirmada, login realizado, voucher copiado) e mensagens de erro amigáveis.
   * **Branch:** `feature/frontend-ux-polish`
   * **Commit:** `feat(frontend): adiciona feedback visual de toasts, skeletons e polimento de UI`
-* - [ ] **SUB-803.2: Estados de Carregamento e Tratamento de Erros 404/500**
+* - [x] **SUB-803.2: Estados de Carregamento e Tratamento de Erros 404/500**
   * **Descrição:** Implementar skeletons e spinners durante carregamento de dados e tela amigável para rotas inexistentes.
 
 #### 📋 **TSK-804: Orquestração de Release Final, Roteiro da Banca e Tag v1.0.0**
-* - [ ] **SUB-804.1: Elaboração do Roteiro Oficial de Apresentação da Banca**
+* - [x] **SUB-804.1: Elaboração do Roteiro Oficial de Apresentação da Banca**
   * **Descrição:** Criar `Gestão do Projeto/ROTEIRO_APRESENTACAO_BANCA.md` com checklist de apresentação de 15 minutos destacando todas as tecnologias exigidas pelo Prof. Ronildo.
   * **Branch:** `chore/release-v1.0.0-prep`
   * **Commit:** `chore(release): prepara roteiro da banca avaliadora e orquestracao final v1.0.0`
-* - [ ] **SUB-804.2: Preparação do PR Final para Branch `main` (Tag v1.0.0)**
+* - [x] **SUB-804.2: Preparação do PR Final para Branch `main` (Tag v1.0.0)**
   * **Descrição:** Validação final da stack com `docker compose up --build` e abertura do Pull Request oficial da entrega da disciplina.
 
 ### Critérios de Aceite (DoD - Sprint 8)
